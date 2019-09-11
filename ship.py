@@ -8,29 +8,31 @@ class Direction(Enum):
 
 
 class Ship:
-    def __init__(self, data, origin, direction):
-        self.size = data
+    # constructor - creates a ship of size(size), an origin and a given direction
+    # assumes that edge cases are checked for (no negative indices)
+    def __init__(self, size, origin, direction):
+        self.size = size
         self.origin = origin
         self.direction = direction
 
         self.List = []
 
-    def getOrientation(self):
-        if(self.direction.casefold() == "left"):
-            self.List=[self.origin, (self.origin[0], self.origin[1]-1), (self.origin[0], self.origin[1]-2)]
-        elif(self.direction.casefold() =="right"):
-            self.List = [self.origin, (self.origin[0], self.origin[1]+1), (self.origin[0], self.origin[1]+2)]
-        elif(self.direction.casefold() =="up"):
-            self.List = [self.origin, (self.origin[0]-1, self.origin[1]), (self.origin[0]-2, self.origin[1])]
-        elif(self.direction.casefold()=="down"):
-            self.List = [self.origin, (self.origin[0]+1, self.origin[1]), (self.origin[0]+2, self.origin[1])]
+    #returns indexes that the ship has occupied  
+    def get_cells(self):
+        self.list=[self.origin]
+
+        for i in range(1, self.size):
+            if(self.direction.casefold()=="left"):
+                self.list.append((self.origin[0], self.origin[1]-i))
+            elif(self.direction.casefold()=="right"):
+                self.list.append((self.origin[0], self.origin[1]+i))
+            elif(self.direction.casefold()=="up"):
+                self.list.append((self.origin[0]-i, self.origin[1]))
+            elif(self.direction.casefold()=="down"):
+                self.list.append((self.origin[0]+i, self.origin[1]))
+        
         
 
-        return self.List
+        return self.list
 
-
-
-battleship  = Ship(4, (4,3), "left") 
-
-print(battleship.getOrientation())
 
