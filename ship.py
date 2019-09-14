@@ -13,7 +13,7 @@ class Ship:
     def __init__(self, size, origin, direction):
         self.size = size
         self.origin = origin
-        self.direction = direction
+        self.direction = Direction(direction)
 
         self.List = []
 
@@ -22,17 +22,16 @@ class Ship:
         self.list=[self.origin]
 
         for i in range(1, self.size):
-            if(self.direction.casefold()=="left"):
+            if(self.direction == self.direction.LEFT):
                 self.list.append((self.origin[0], self.origin[1]-i))
-            elif(self.direction.casefold()=="right"):
+            elif(self.direction ==self.direction.RIGHT):
                 self.list.append((self.origin[0], self.origin[1]+i))
-            elif(self.direction.casefold()=="up"):
+            elif(self.direction ==self.direction.UP):
                 self.list.append((self.origin[0]-i, self.origin[1]))
-            elif(self.direction.casefold()=="down"):
+            elif(self.direction ==self.direction.DOWN):
                 self.list.append((self.origin[0]+i, self.origin[1]))
         
         
 
         return self.list
-
 
