@@ -12,7 +12,7 @@ class Player():
 
     def be_attacked(self):
         if self.total_ship_blocks > 0:
-            self.total_ship_blocks--
+            self.total_ship_blocks-=1
 
     def has_lost(self):
         self.lost = True
