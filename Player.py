@@ -1,13 +1,13 @@
 ##Player
-from board.py import Board
+from board import Board
 
 class Player():
-    def __init__(self, name, num_of_ships, board)
+    def __init__(self, name, num_of_ships):
         self.name = name
         self.num_of_ships = num_of_ships
         self.lost = False
-        self.total_ship_blocks = get_ship_blocks(num_of_ships)
-        #What do I do with a board???
+        self.total_ship_blocks = self.get_ship_blocks(num_of_ships)
+        self.board = Board()
 
 
     def be_attacked(self):
@@ -18,7 +18,7 @@ class Player():
         self.lost = True
         print(self.name + "has lost")
 
-    def get_ship_blocks(num_of_ships):
+    def get_ship_blocks(self, num_of_ships):
         sum = 0
         for i in range(1, num_of_ships+1):
             sum+=i
