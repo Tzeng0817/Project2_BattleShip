@@ -53,6 +53,8 @@ class Game:
         Constructs a new Game object. Creates two internal player objects.
         :return: returns none.
         """
+        self.player1_name = player1_name
+        self.player2_name = player2_name
         self.player1 = Player(player1_name, num_of_ships)
         self.player2 = Player(player2_name, num_of_ships)
 
@@ -85,13 +87,12 @@ class Game:
         Shows the endgame screen and announces the winner
         :return: returns none.
         @TODO: Implement the endgame screen through PyQT5
-        and create a get_name function for the Player class
         """
         #Show end game screen (PYQT)
         if self.player1.has_lost() == True:
-            print(self.player2.get_name() + " has won!")
+            print(self.player1_name + " has won!")
         elif self.player2.has_lost() == False:
-            print(self.player1.get_name() + " has won!")
+            print(self.player2_name + " has won!")
 
     def run(self):
         """
