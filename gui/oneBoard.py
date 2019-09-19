@@ -24,7 +24,7 @@ class Ui_oneBoard(object):
         self.player_board.setMinimumSize(QtCore.QSize(400, 47))
         self.player_board.setMaximumSize(QtCore.QSize(400, 400))
         self.player_board.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
-        self.player_board.setStyleSheet(open("mystylesheet.css").read())
+        self.player_board.setStyleSheet(open("gui/mystylesheet.css").read())
         self.player_board.setObjectName("player_board")
 
         self.boardLayout_3 = QtWidgets.QGridLayout(self.player_board)
@@ -41,6 +41,12 @@ class Ui_oneBoard(object):
         self.label_yourBoard.setTextFormat(QtCore.Qt.RichText)
         self.label_yourBoard.setAlignment(QtCore.Qt.AlignCenter)
         self.label_yourBoard.setObjectName("label_yourBoard")
+
+        self.label_their_board = QtWidgets.QLabel(self.centralwidget)
+        self.label_their_board.setGeometry(QtCore.QRect(500, 30, 100, 167))
+        self.label_their_board.setTextFormat(QtCore.Qt.RichText)
+        self.label_their_board.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_their_board.setObjectName("label_their_board")
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(770, 230, 120, 80))
@@ -118,7 +124,9 @@ class Ui_oneBoard(object):
 
         for i in range(8):
             self.label_col[i].setText(_translate("MainWindow", uppercase_alphabet[i]))
+        
         self.label_yourBoard.setText(_translate("MainWindow", "YOUR BOARD"))
+        self.label_their_board.setText(_translate("MainWindow", "Their Board"))
         self.menuPlayBoard.setTitle(_translate("MainWindow", "PlayBoard"))
 
 

@@ -1,4 +1,3 @@
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from gui.player import Ui_player
@@ -6,15 +5,17 @@ from gui.player import Ui_player
 class Ui_start_menu(object):
     def open_player(self):
         self.window = QtWidgets.QMainWindow()
+        self.main_window.close()
         #second file name
         self.ui = Ui_player()
         # to hide the other windeow
-        startMenu.hide()
         self.ui.setupUi(self.window)
         self.window.show()
-    def setupUi(self, MainWindow):
+    def __init__(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(421, 486)
+
+        self.main_window = MainWindow
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -41,7 +42,6 @@ class Ui_start_menu(object):
         self.button_play.setSizePolicy(sizePolicy)
         self.button_play.setMinimumSize(QtCore.QSize(10, 10))
         # font
-        self.button_play.setFont(font)
         self.button_play.setObjectName("button_play")
         self.button_play.clicked.connect(self.open_player)
         self.startMenu_container.addWidget(self.button_play)
@@ -55,6 +55,7 @@ class Ui_start_menu(object):
         # font
         # self.button_exit.setFont(font)
         self.button_exit.setObjectName("button_exit")
+        self.button_exit.clicked.connect(MainWindow.close)
         self.startMenu_container.addWidget(self.button_exit)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -68,8 +69,6 @@ class Ui_start_menu(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -77,17 +76,4 @@ class Ui_start_menu(object):
         self.button_play.setText(_translate("MainWindow", "PLAY"))
         self.button_exit.setText(_translate("MainWindow", "EXIT"))
 
-app = QApplication(sys.argv)
-startMenu = QMainWindow()
-font = QtGui.QFont()
-font.setFamily("KaiTi")
-font.setPointSize(20)
-app.setFont(font)
-
-
-ui = Ui_start_menu()
-ui.setupUi(startMenu)
-
-startMenu.show()
-sys.exit(app.exec_())
 

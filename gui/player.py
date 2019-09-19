@@ -7,6 +7,7 @@ class Ui_player(object):
     def open_board(self):
         self.window = QtWidgets.QMainWindow()
         #second file name
+        self.main_window.close()
         self.ui = Ui_oneBoard()
         self.ui.setupUi(self.window)
         self.window.show()
@@ -17,6 +18,9 @@ class Ui_player(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(421, 486)
+
+        self.main_window = MainWindow
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
