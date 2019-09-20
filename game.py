@@ -3,7 +3,7 @@ Game module containing the Game class and
 the SetUp class which gets the information needed for
 Game to initialize 
 """
-from Player import Player, be_attacked, has_lost
+from player import Player
 
 class SetUp:
     """
@@ -68,7 +68,7 @@ class Game:
         #Show player one's board with ships shown (PYQT)
         #Show player two's board with ships hidden (PYQT)
         #Let player one attack (PYQT)
-        self.player2.be_attacked()
+        self.player2.be_attacked(3, 5)
 
     def player2_turn(self):
         """
@@ -80,7 +80,7 @@ class Game:
         #Show player one's board with ships shown (PYQT)
         #Show player two's board with ships hidden (PYQT)
         #Let player two attack (PYQT)
-        self.player1.be_attacked()
+        self.player1.be_attacked(3, 4)
 
     def end_game(self):
         """
@@ -100,6 +100,6 @@ class Game:
         :return: returns none.
         """
         while (self.player1.has_lost == False) and (self.player2.has_lost == False):
-            player1_turn()
-            player2_turn()
-        end_game()
+            self.player1_turn()
+            self.player2_turn()
+        self.end_game()
