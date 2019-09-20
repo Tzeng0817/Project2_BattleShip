@@ -1,46 +1,36 @@
 ##Player
-"""
-Player module for containing the player class
-"""
 from board import Board
 
 class Player():
-    """
-    Player controls moves players can make and keeps track of given plyer's ships
-    """
+    #Player contructor called from game class
     def __init__(self, name, num_of_ships):
-        """
-        Constructs a new Player object. Manages player's ships.
-        :return: returns none.
-        """
         self.name = name
         self.num_of_ships = num_of_ships
         self.lost = False
         self.total_ship_blocks = self.get_ship_blocks(num_of_ships)
         self.board = Board()
 
-
-    def be_attacked(self):
-        """
-        Decreases amount of ship blocks for current player when one of their ships has been attacked
-        :return: returns none.
-        """
-        if self.total_ship_blocks > 0:
-            self.total_ship_blocks-=1
-
+    #used by game class to determine if player has lost
     def has_lost(self):
-        """
-        Lets player know when they have lost. 
-        :return: returns none.
-        """
-        self.lost = True
-        print(self.name + "has lost")
+            if self.total_ship_blocks == 0:
+                self.lost = True
+                print(self.name + "has lost")
+                return True
+            else:
+                return False
 
+    #calls board class to determine if ship is hit and returns information to game
+    def be_attacked(self, x_pos: int, y_pos: int) -> bool:
+        if board.attacked(self, x_pos, y_pos) == True and self.total_ship_blocks > 0:
+            self.total_ship_blocks-=1
+            print("You have hit the other player's ship!")
+            return True
+        else:
+            print("Miss... Next player please")
+            return False
+
+    #calculates number of total ship blocks from number of ships choosen from user
     def get_ship_blocks(self, num_of_ships):
-        """
-        calculates amount of ship blocks a player has.
-        :return: int - amount of ship blocks available to player.
-        """
         sum = 0
         for i in range(1, num_of_ships+1):
             sum+=i
