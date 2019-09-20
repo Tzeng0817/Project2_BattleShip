@@ -1,6 +1,16 @@
+"""
+Ship class for ship object
+Contains enumerator for direction the ship is oriented from origin
+
+"""
+
 from enum import Enum
 
 class Direction(Enum):
+    """
+    Simple enum for the direction a ship can be oriented.
+    up (0), right (1), down (2), left (3)
+    """
     UP = 0
     RIGHT = 1
     DOWN = 2
@@ -8,9 +18,17 @@ class Direction(Enum):
 
 
 class Ship:
+
+    """
+    Ship creates a ship, initialized with a size, direction, and origin
+    """
     # constructor - creates a ship of size(size), an origin and a given direction
     # assumes that edge cases are checked for (no negative indices)
     def __init__(self, size, origin, direction):
+        """
+        Creates a new Ship object
+        :returns: returns none
+        """
         self.size = size
         self.origin = origin
         self.direction = Direction(direction)
@@ -19,6 +37,10 @@ class Ship:
 
     #returns indexes that the ship has occupied  
     def get_cells(self):
+        """
+        retrieves the locations of the ship
+        :returns: returns list of tuples with the locations of the ships on the grid 
+        """
         self.list=[self.origin]
 
         for i in range(1, self.size):
