@@ -13,7 +13,7 @@ class Player():
     def has_lost(self):
             if self.total_ship_blocks == 0:
                 self.lost = True
-                print(self.name + "has lost")
+                print("You have lost")
                 return True
             else:
                 return False
