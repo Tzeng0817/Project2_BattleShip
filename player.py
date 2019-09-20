@@ -3,7 +3,7 @@ from board import Board
 
 class Player():
     #Player contructor called from game class
-    def __init__(self, name, num_of_ships):
+    def __init__(self, num_of_ships):
         self.name = name
         self.num_of_ships = num_of_ships
         self.lost = False
