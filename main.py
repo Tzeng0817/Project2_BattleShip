@@ -1,19 +1,19 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import QtGui
-from gui.startMenu import Ui_start_menu
-import sys
+from board_window import BoardWindow
+from board import Board
+import arcade
 
+WIDTH = 80
+HEIGHT = 80
+MARGIN = 5
+SCREEN_WIDTH = (WIDTH + MARGIN) * 8 + MARGIN + 30
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * 8 + MARGIN + 30
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    startMenu = QMainWindow()
-    font = QtGui.QFont()
-    font.setFamily("KaiTi")
-    font.setPointSize(20)
-    app.setFont(font)
+if __name__ == "__main__":
+    your_board = Board()
+    their_board = Board()
+    your_board.attacked(0, 0)
+    your_board.attacked(3, 3)
+    BoardWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Your Board", your_board)
+    BoardWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Their Board", their_board)
+    arcade.run()
 
-
-    ui = Ui_start_menu(startMenu)
-
-    startMenu.show()
-    sys.exit(app.exec_())
