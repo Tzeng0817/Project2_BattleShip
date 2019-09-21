@@ -1,9 +1,5 @@
 import arcade
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 800
-SCREEN_TITLE = "Click on the number of ships"
-
 
 class Button:
     """ Text-based button """
