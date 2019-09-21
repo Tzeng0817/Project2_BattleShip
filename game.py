@@ -1,11 +1,14 @@
 """
 Game module containing the Game class and
 the SetUp class which gets the information needed for
-Game to initialize 
+Game to initialize
 """
 import arcade
-from player import Player
 from board_window import BoardWindow
+from popup_modal import PopupModal
+from player import Player
+import sys
+import time
 
 class Game:
     """
@@ -20,6 +23,10 @@ class Game:
         self.player1 = Player(num_of_ships)
         self.player2 = Player(num_of_ships)
         self.turn_over = True
+        self.game_over = False
+
+        # self.transition_window = TurnTransitionView()
+        # self.transition_window.set_visible(False)
 
         self.player2_own_board = BoardWindow(715, 715, "Your Board", self.player2, self.on_turn_end, True)
         self.player2_own_board.set_visible(False)
@@ -30,7 +37,6 @@ class Game:
         self.player1_own_board.set_visible(False)
         self.player1_other_board = BoardWindow(715, 715, "Their Board", self.player2, self.on_turn_end, False)
         self.player1_other_board.set_visible(False)
-
 
         self.current_player = self.player1
 
@@ -65,13 +71,25 @@ class Game:
         @TODO: Implement the endgame screen through PyQT5
         """
         #Show end game screen (PYQT)
-        if self.player1.has_lost() == True:
+
+        self.game_over = True
+
+        self.player1_other_board.set_visible(False)
+        self.player1_own_board.set_visible(False)
+        self.player2_other_board.set_visible(False)
+        self.player2_own_board.set_visible(False)
+
+        if not self.player1.has_lost():
+            PopupModal("Player 1 wins!")
             print("Player 1 has won!")
-        elif self.player2.has_lost() == False:
+        elif not self.player2.has_lost():
             print("Player 2 has won!")
-    
+            PopupModal("Player 2 wins!")
+
+        # arcade.pause(5)
+        arcade.schedule(sys.exit, 5)
+
     def on_turn_end(self):
-        self.turn_over = True
         if self.current_player == self.player1:
             self.player1_own_board.set_visible(False)
             self.player1_other_board.set_visible(False)
@@ -80,6 +98,10 @@ class Game:
             self.player2_own_board.set_visible(False)
             self.player2_other_board.set_visible(False)
             self.current_player = self.player1
+        # switch = PopupModal("Switch Sides!")
+        arcade.pause(3)
+        # switch.set_visible(False)
+        self.turn_over = True
 
     def run(self, _):
         """
@@ -96,7 +118,5 @@ class Game:
                 self.player2_own_board.set_visible(True)
                 self.player2_other_board.set_visible(True)
             self.turn_over = False
-        elif not self.turn_over:
-            pass
-        else:
+        elif self.player1.has_lost() or self.player2.has_lost():
             self.end_game()
