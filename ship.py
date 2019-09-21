@@ -53,7 +53,6 @@ class Ship:
             elif(self.direction ==self.direction.DOWN):
                 self.list.append((self.origin[0]+i, self.origin[1]))
         
-        
 
         return self.list
 
