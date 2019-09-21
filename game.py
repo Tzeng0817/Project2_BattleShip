@@ -3,10 +3,9 @@ Game module containing the Game class and
 the SetUp class which gets the information needed for
 Game to initialize 
 """
+import arcade
 from player import Player
 from board_window import BoardWindow
-import arcade
-import os
 
 class Game:
     """
