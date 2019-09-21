@@ -4,6 +4,7 @@ Button module containing the button class and
 implements a text based and number based button
 """
 
+
 class Button:
     """
     Button class to make the creation of buttons easier - text based button
