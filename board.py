@@ -36,7 +36,7 @@ class Board:
         :return: returns none.
         @TODO: Implement this once UI is complete
         """
-        self.ships = [Ship(2, (0, 0), Direction.RIGHT), Ship(4, (7, 7), Direction.LEFT)]
+        self.ships = [Ship(2, (0, 0), Direction.RIGHT), Ship(4, (3, 3), Direction.LEFT)]
 
     def attacked(self, x_pos: int, y_pos: int) -> bool:
         """
@@ -54,8 +54,8 @@ class Board:
             if (x_pos, y_pos) in ship.get_cells():
                 self.hits[x_pos][y_pos] = CellStatus.HIT
                 return True
-            self.hits[x_pos][y_pos] = CellStatus.MISS
-            return False
+        self.hits[x_pos][y_pos] = CellStatus.MISS
+        return False
 
     def get_board_view(self) -> (List[List[CellStatus]], List[List[Tuple[int, int]]]):
         """

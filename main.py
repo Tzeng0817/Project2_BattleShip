@@ -1,19 +1,8 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import QtGui
-from gui.startMenu import Ui_start_menu
-import sys
+from game import Game
+import arcade
 
+if __name__ == "__main__":
+    GAME = Game("", "", 2)
+    arcade.schedule(GAME.run, 0.25)
+    arcade.run()
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    startMenu = QMainWindow()
-    font = QtGui.QFont()
-    font.setFamily("KaiTi")
-    font.setPointSize(20)
-    app.setFont(font)
-
-
-    ui = Ui_start_menu(startMenu)
-
-    startMenu.show()
-    sys.exit(app.exec_())
