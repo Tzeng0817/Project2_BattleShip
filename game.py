@@ -4,6 +4,9 @@ the SetUp class which gets the information needed for
 Game to initialize 
 """
 from player import Player
+from board_window import BoardWindow
+import arcade
+import os
 
 class SetUp:
     """
@@ -55,8 +58,22 @@ class Game:
         """
         self.player1_name = player1_name
         self.player2_name = player2_name
-        self.player1 = Player(player1_name, num_of_ships)
-        self.player2 = Player(player2_name, num_of_ships)
+        self.player1 = Player(num_of_ships)
+        self.player2 = Player(num_of_ships)
+        self.turn_over = True
+
+        self.player2_own_board = BoardWindow(715, 715, "Your Board", self.player2, self.on_turn_end, True)
+        self.player2_own_board.set_visible(False)
+        self.player2_other_board = BoardWindow(715, 715, "Their Board", self.player1, self.on_turn_end, False)
+        self.player2_other_board.set_visible(False)
+
+        self.player1_own_board = BoardWindow(715, 715, "Your Board", self.player1, self.on_turn_end, True)
+        self.player1_own_board.set_visible(False)
+        self.player1_other_board = BoardWindow(715, 715, "Their Board", self.player2, self.on_turn_end, False)
+        self.player1_other_board.set_visible(False)
+
+
+        self.current_player = self.player1
 
     def player1_turn(self):
         """
@@ -93,13 +110,34 @@ class Game:
             print(self.player1_name + " has won!")
         elif self.player2.has_lost() == False:
             print(self.player2_name + " has won!")
+    
+    def on_turn_end(self):
+        self.turn_over = True
+        if self.current_player == self.player1:
+            self.player1_own_board.set_visible(False)
+            self.player1_other_board.set_visible(False)
+            self.current_player = self.player2
+        else:
+            self.player2_own_board.set_visible(False)
+            self.player2_other_board.set_visible(False)
+            self.current_player = self.player1
 
-    def run(self):
+    def run(self, _):
         """
         Handles the flow of the game and detects if a player has lost
         :return: returns none.
         """
-        while (self.player1.has_lost == False) and (self.player2.has_lost == False):
-            self.player1_turn()
-            self.player2_turn()
-        self.end_game()
+        if ((not self.player1.has_lost()) or (not self.player2.has_lost())) and self.turn_over:
+            if self.current_player == self.player1:
+                self.player1_own_board.recreate_grid()
+                self.player1_own_board.set_visible(True)
+                self.player1_other_board.set_visible(True)
+            else:
+                self.player2_own_board.recreate_grid()
+                self.player2_own_board.set_visible(True)
+                self.player2_other_board.set_visible(True)
+            self.turn_over = False
+        elif not self.turn_over:
+            pass
+        else:
+            self.end_game()

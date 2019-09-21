@@ -1,5 +1,7 @@
 import arcade
-from board import CellStatus, Board
+from board import CellStatus
+from player import Player
+
 
 # This sets the WIDTH and HEIGHT of each grid location
 WIDTH = 80
@@ -12,24 +14,25 @@ MARGIN = 5
 # Do the math to figure out our screen dimensions
 SCREEN_WIDTH = (WIDTH + MARGIN) * 8 + MARGIN + 30
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * 8 + MARGIN + 30
-SCREEN_TITLE = "Battleship"
 
 class BoardWindow(arcade.Window):
     '''
     Window for the main game phase (displaying boards and shooting shots)
     '''
 
-    def __init__(self, width, height, title, board: Board):
+    def __init__(self, width, height, title, player: Player, on_end, is_own_board: bool):
         super().__init__(width, height, title)
         self.shape_list = None
-        self.board = board
+        self.player = player
+        self.on_end = on_end
+        self.is_own_board = is_own_board
 
         arcade.set_background_color(arcade.color.BLACK)
         self.recreate_grid()
 
     def recreate_grid(self):
         self.shape_list = arcade.ShapeElementList()
-        grid = self.board.get_board_view()[0]
+        grid = self.player.board.get_board_view()[0]
         for row in range(8):
             for column in range(8):
                 if grid[row][column] == CellStatus.EMPTY:
@@ -65,7 +68,9 @@ class BoardWindow(arcade.Window):
         """
         Called when the user presses a mouse button.
         """
-
+        if self.is_own_board:
+            return
+        
         # Change the x/y screen coordinates to grid coordinates
         column = (x - 30) // (WIDTH + MARGIN)
         row = (y) // (HEIGHT + MARGIN)
@@ -75,6 +80,7 @@ class BoardWindow(arcade.Window):
         # Make sure we are on-grid. It is possible to click in the upper right
         # corner in the margin and go to a grid location that doesn't exist
         if row < 8 and column < 8:
-            self.board.attacked(row, column)
-
+            self.player.be_attacked(row, column)
         self.recreate_grid()
+        self.on_end()
+

@@ -23,12 +23,12 @@ class Player():
         :return: returns bool - loss status
         
         """
-            if self.total_ship_blocks == 0:
-                self.lost = True
-                print("You have lost")
-                return True
-            else:
-                return False
+        if self.total_ship_blocks == 0:
+            self.lost = True
+            print("You have lost")
+            return True
+        else:
+            return False
 
     #calls board class to determine if ship is hit and returns information to game
     def be_attacked(self, x_pos: int, y_pos: int) -> bool:
