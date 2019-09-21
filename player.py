@@ -13,15 +13,14 @@ class Player():
         """
         self.num_of_ships = num_of_ships
         self.lost = False
-        self.total_ship_blocks = self.get_ship_blocks(num_of_ships)
+        self.total_ship_blocks = ((num_of_ships) * (num_of_ships + 1)) / 2
         self.board = Board()
 
     #used by game class to determine if player has lost
     def has_lost(self):
         """
         Lets board know when player has lost
-        :return: returns bool - loss status
-        
+        :return: returns bool - loss status   
         """
         if self.total_ship_blocks == 0:
             self.lost = True
@@ -36,8 +35,9 @@ class Player():
         Decrements amount of ship blocks available when player is attacked
         :return: bool - true if hit, false if not
         """
+        print(self.total_ship_blocks)
         if self.board.attacked(x_pos, y_pos) == True and self.total_ship_blocks > 0:
-            self.total_ship_blocks-=1
+            self.total_ship_blocks -= 1
             print("You have hit the other player's ship!")
             return True
         else:
