@@ -1,8 +1,13 @@
 import arcade
-
+"""
+Button module containing the button class and
+implements a text based and number based button
+"""
 
 class Button:
-    """ Text-based button """
+    """
+    Button class to make the creation of buttons easier - text based button
+    """
     def __init__(self,
                  center_x, center_y,
                  width, height,
@@ -13,6 +18,9 @@ class Button:
                  highlight_color=arcade.color.WHITE,
                  shadow_color=arcade.color.GRAY,
                  button_height=2):
+        """
+        Constructs a button with position, text, font size, color, button width and height
+        """
         self.center_x = center_x
         self.center_y = center_y
         self.width = width
@@ -27,6 +35,10 @@ class Button:
         self.button_height = button_height
 
     def draw(self):
+        """
+        initiates the button as a rectable with position and 
+        tracks whether or not the given button is pressed and displays corresponding color 
+        """
         arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width,
                                      self.height, self.face_color)
 
@@ -72,9 +84,15 @@ class Button:
                          anchor_x="center", anchor_y="center")
 
     def on_press(self):
+        """
+        bool controlling whether the button is pressed or not
+        """
         self.pressed = True
 
     def on_release(self):
+        """
+        bool checking whether button is released
+        """
         self.pressed = False
 
 
@@ -101,11 +119,17 @@ def check_mouse_release_for_buttons(x, y, button_list):
 
 
 class NumberButton(Button):
+    """
+    Button class that deals with number based buttons
+    """
     def __init__(self, center_x, center_y, action_function, number):
         super().__init__(center_x, center_y, 100, 40, number, 18, "Arial")
         self.action_function = action_function
 
     def on_release(self):
+        """
+        implements methods necessary when button is released
+        """
         super().on_release()
         self.action_function()
 
