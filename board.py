@@ -30,13 +30,13 @@ class Board:
         self.hits = [[CellStatus.EMPTY] * 8 for _ in range(0, 8)]
         self._place_ships()
 
-    def _place_ships(self):
+    def place_ships(self):
         """
         Handles board setup for placing ships
         :return: returns none.
         @TODO: Implement this once UI is complete
         """
-        self.ships = [Ship(2, (0, 0), Direction.RIGHT), Ship(1, (3, 3), Direction.LEFT)]
+        self.ships.append(Ship(length, origin, direction));
 
     def attacked(self, x_pos: int, y_pos: int) -> bool:
         """
