@@ -1,70 +1,31 @@
 """
-Game module containing the Game class and
-the SetUp class which gets the information needed for
-Game to initialize 
+game module containing the Game class which creates the main menu GUI.
 """
 
 import arcade
+from main_menu_gui import MainMenuGUI
 from player import Player
+
+GAME_TITLE = "KRAAG Battleship!"
+WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 800
 
 class Game:
     """
-    Game manages the flow of the game
+    Game manages the flow of the game and the GUI.
     """
 
     def __init__(self, num_of_ships):
         """
-        Constructs a new Game object. Creates two internal player objects.
+        Constructs a new Game object. creates and instance of the main menu window.
         :return: returns none.
         """
         self.num_of_ships = 0
-        self.make_main_menu()
-        #some class that handles getting the num_of_ships from the user from Karen
-        self.player1 = Player(num_of_ships)
-        self.player2 = Player(num_of_ships)
-
-    def player1_turn(self):
-        """
-        Handles all the actions player 1 can 
-        do on their turn
-        :return: returns none.
-        @TODO: Implement the board through PyQT5
-        """
-        #Show player one's board with ships shown (PYQT)
-        #Show player two's board with ships hidden (PYQT)
-        #Let player one attack (PYQT)
-        #self.player2.be_attacked()
-
-    def player2_turn(self):
-        """
-        Handles all the actions player 2 can 
-        do on their turn
-        :return: returns none.
-        @TODO: Implement the board through PyQT5
-        """
-        #Show player one's board with ships shown (PYQT)
-        #Show player two's board with ships hidden (PYQT)
-        #Let player two attack (PYQT)
-        #self.player1.be_attacked()
-
-    def end_game(self):
-        """
-        Shows the endgame screen and announces the winner
-        :return: returns none.
-        @TODO: Implement the endgame screen through PyQT5
-        """
-        #Show end game screen (PYQT)
-        if self.player1.has_lost() == True:
-            print("Player 1 has won!")
-        elif self.player2.has_lost() == False:
-            print("Player 2 has won!")
+        self.main_menu = MainMenuGUI(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_TITLE)
 
     def run(self):
         """
-        Handles the flow of the game and detects if a player has lost
+        Will eventually handle the flow of the game. Currently only creates the main menu window.
         :return: returns none.
         """
-        while (self.player1.has_lost == False) and (self.player2.has_lost == False):
-            self.player1_turn()
-            self.player2_turn()
-        self.end_game()
+        self.main_menu.setup_main_menu()
