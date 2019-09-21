@@ -36,7 +36,7 @@ class Board:
         :return: returns none.
         @TODO: Implement this once UI is complete
         """
-        self.ships = [Ship(2, (0, 0), Direction.RIGHT), Ship(4, (3, 3), Direction.LEFT)]
+        self.ships = [Ship(2, (0, 0), Direction.RIGHT), Ship(1, (3, 3), Direction.LEFT)]
 
     def attacked(self, x_pos: int, y_pos: int) -> bool:
         """
