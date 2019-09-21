@@ -10,14 +10,18 @@ from player import Player
 import sys
 import time
 
+GAME_TITLE = "KRAAG Battleship!"
+WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 800
+
 class Game:
     """
-    Game manages the flow of the game
+    Game manages the flow of the game and the GUI.
     """
 
     def __init__(self, num_of_ships):
         """
-        Constructs a new Game object. Creates two internal player objects.
+        Constructs a new Game object. creates and instance of the main menu window.
         :return: returns none.
         """
         self.player1 = Player(num_of_ships)
@@ -105,7 +109,7 @@ class Game:
 
     def run(self, _):
         """
-        Handles the flow of the game and detects if a player has lost
+        Will eventually handle the flow of the game. Currently only creates the main menu window.
         :return: returns none.
         """
         if ((not self.player1.has_lost()) or (not self.player2.has_lost())) and self.turn_over:
