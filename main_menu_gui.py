@@ -5,45 +5,27 @@ The basic architecture for the code was taken from an example in the Arcade docu
 
 import arcade
 import buttons
+import sys
 
-class MainMenuGUI(arcade.Window):
-    """
-    MainMenuGUI manages the main menu GUI.
-    """
+WIDTH = 800
+HEIGHT = 800
 
-    def __init__(self, width, height, title):
-        """
-        Constructs a new MainMenuGUI object and sets the background color of the window.
-        :return: returns none.
-        """
-        super().__init__(width, height, title)
-
-        arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
-
-        self.button_list = None
-
-    def setup_main_menu(self):
-        """
-        Creates the on-screen GUI buttons
-        :return: returns none.
-        """
+class MainMenuGUI(arcade.View):
+    def __init__(self):
+        super().__init__()
         self.button_list = []
-
-        play_button = buttons.PlayTextButton(400, 455, self.play_game)
+        play_button = buttons.PlayTextButton(WIDTH/2, HEIGHT/3, self.play_game)
+        quit_button = buttons.QuitTextButton(WIDTH/2, (HEIGHT/3) - 55, self.quit_game)
         self.button_list.append(play_button)
-
-        quit_button = buttons.QuitTextButton(400, 400, self.quit_game)
         self.button_list.append(quit_button)
 
+    def on_show(self):
+        arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
+
     def on_draw(self):
-        """
-        Renders the screen.
-        :return: returns none.
-        """
-
         arcade.start_render()
-
-        # Draw the buttons
+        arcade.draw_text("Welcome to KRAAG Battleship!", WIDTH/2, HEIGHT/2,
+                         arcade.color.BLACK, font_size=50, anchor_x="center")
         for button in self.button_list:
             button.draw()
 
@@ -66,7 +48,8 @@ class MainMenuGUI(arcade.Window):
         Will one day advance the game state.
         :return: returns none.
         """
-        return
+        ship_num_view = NumOfShipsGUI()
+        self.window.show_view(ship_num_view)
 
     def quit_game(self):
         """
@@ -74,3 +57,4 @@ class MainMenuGUI(arcade.Window):
         :return: returns none.
         """
         arcade.close_window()
+        sys.exit() #forcibly exits the python program so no futher windows open

@@ -170,3 +170,24 @@ class QuitTextButton(TextButton):
         super().on_release()
         self.action_function()
 
+class NumberButton(TextButton):
+    """
+    Button class that deals with number based buttons
+    """
+    def __init__(self, center_x, center_y, action_function, num_of_ships):
+        """
+        Constructs a new NumberButton.
+        :param: center_x (int): x position of where the center of the button is so the textbutton class can draw it.
+        :param: center_y (int): y position of where the center of the button is so the textbutton class can draw it.
+        :param: action_function: The function that is executed when the button is pressed.
+        :return: returns none.
+        """
+        super().__init__(center_x, center_y, 100, 40, str(num_of_ships), 18, "Arial")
+        self.action_function = action_function
+
+    def on_release(self):
+        """
+        implements methods necessary when button is released
+        """
+        super().on_release()
+        self.action_function()
