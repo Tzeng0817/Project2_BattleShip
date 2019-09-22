@@ -116,7 +116,7 @@ class ShipPlacementView(arcade.View):
         # Change the x/y screen coordinates to grid coordinates
         self.column = (x - OFFSET_AXIS_LABEL) // (WIDTH + MARGIN)
         self.row = y // (HEIGHT + MARGIN)
-        if self.column >= 8 or self.row >= 8:
+        if self.column >= 8 or self.row >= 8 or self.column < 0 or self.row < 0:
             return
 
         row = self.row
@@ -235,6 +235,7 @@ class ShipPlacementView(arcade.View):
 class DummyView(arcade.View):
     iterations = 0
     players = []
+    has_ran = False
     def __init__(self):
         super().__init__()
         DummyView.iterations += 1
@@ -255,8 +256,11 @@ class DummyView(arcade.View):
         player2 = Player(DummyView.players[0].num_of_ships)
         next_player_ships_placement = ShipPlacementView(player2)
         self.window.show_view(next_player_ships_placement)
-        if (DummyView.iterations == 2):
+        if (DummyView.iterations == 2 and not DummyView.has_ran):
+            arcade.get_window().set_visible(False)
             player1 = DummyView.players[0]
             player2 = DummyView.players[1]
             GAME = Game(player1, player2)
+            arcade.set_window(GAME.player1_other_board)
             arcade.schedule(GAME.run, 0.25)
+            DummyView.has_ran = True

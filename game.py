@@ -26,24 +26,28 @@ class Game:
         :return: returns none.
         """
 
+        print("Making game")
+
         self.player1 = player1
         self.player2 = player2
         self.turn_over = True
         self.game_over = False
 
+        self.own_board = arcade.Window(715, 715, "Your Board")
+        self.other_board = arcade.Window(715, 715, "Their Board")
+
         self.player2_own_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player2, self.on_turn_end, True)
-        self.player2_own_board.set_visible(False)
         self.player2_other_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player1, self.on_turn_end, False)
-        self.player2_other_board.set_visible(False)
 
         self.player1_own_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
-        self.player1_own_board.set_visible(False)
         self.player1_other_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player2, self.on_turn_end, False)
-        self.player1_other_board.set_visible(False)
+
+        self.own_board.show_view(self.player1_own_board)
+        self.other_board.show_view(self.player1_other_board)
 
         self.current_player = self.player1
 
@@ -55,10 +59,8 @@ class Game:
 
         self.game_over = True
 
-        self.player1_other_board.set_visible(False)
-        self.player1_own_board.set_visible(False)
-        self.player2_other_board.set_visible(False)
-        self.player2_own_board.set_visible(False)
+        self.own_board.set_visible(False)
+        self.other_board.set_visible(False)
 
         if not self.player1.has_lost():
             PopupModal("Player 1 wins!")
@@ -76,15 +78,11 @@ class Game:
         :return: None
         '''
         if self.current_player == self.player1:
-            self.player1_own_board.set_visible(False)
-            self.player1_other_board.set_visible(False)
             self.current_player = self.player2
         else:
-            self.player2_own_board.set_visible(False)
-            self.player2_other_board.set_visible(False)
             self.current_player = self.player1
 
-        arcade.pause(3)
+        arcade.pause(1.5)
         self.turn_over = True
 
     def run(self, _):
@@ -92,16 +90,15 @@ class Game:
         Handles the flow of the game and deciding when to switch turns
         :return: returns none
         """
-
         if ((not self.player1.has_lost()) or (not self.player2.has_lost())) and self.turn_over:
             if self.current_player == self.player1:
                 self.player1_own_board.recreate_grid()
-                self.player1_own_board.set_visible(True)
-                self.player1_other_board.set_visible(True)
+                self.own_board.show_view(self.player1_own_board)
+                self.other_board.show_view(self.player1_other_board)
             else:
                 self.player2_own_board.recreate_grid()
-                self.player2_own_board.set_visible(True)
-                self.player2_other_board.set_visible(True)
+                self.own_board.show_view(self.player2_own_board)
+                self.other_board.show_view(self.player2_other_board)
             self.turn_over = False
         elif self.player1.has_lost() or self.player2.has_lost():
             self.end_game()

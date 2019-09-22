@@ -18,9 +18,9 @@ MARGIN = 5
 
 OFFSET = 30
 
-class BoardWindow(arcade.Window):
+class BoardWindow(arcade.View):
     '''
-    Window for the main game phase (displaying boards and shooting shots)
+    View for the main game phase (displaying boards and shooting shots)
     '''
 
     def __init__(self, width: int, height: int, title: str, player: Player, on_end, is_own_board: bool):
@@ -36,7 +36,7 @@ class BoardWindow(arcade.Window):
         :return: None
         '''
 
-        super().__init__(width, height, title)
+        super().__init__()
         self.shape_list = None
         self.player = player
         self.on_end = on_end
@@ -110,10 +110,10 @@ class BoardWindow(arcade.Window):
 
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
 
-        if row < 8 and column < 8:
+        if row < 8 and column < 8 and row >= 0 and column >= 0:
             if self.player.be_attacked(row, column):
                 arcade.play_sound(arcade.load_sound('./sounds/hit.m4a'))
             else:
                 arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
-        self.recreate_grid()
-        self.on_end()
+            self.recreate_grid()
+            self.on_end()
