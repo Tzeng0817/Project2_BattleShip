@@ -73,7 +73,6 @@ class Game:
 
         :return: None
         '''
-
         if self.current_player == self.player1:
             self.player1_own_board.set_visible(False)
             self.player1_other_board.set_visible(False)
@@ -83,8 +82,6 @@ class Game:
             self.player2_other_board.set_visible(False)
             self.current_player = self.player1
 
-        arcade.pause(3)
-
         self.turn_over = True
 
     def run(self, _):
@@ -92,7 +89,7 @@ class Game:
         Handles the flow of the game and deciding when to switch turns
         :return: returns none
         """
-
+        
         if ((not self.player1.has_lost()) or (not self.player2.has_lost())) and self.turn_over:
             if self.current_player == self.player1:
                 self.player1_own_board.recreate_grid()
