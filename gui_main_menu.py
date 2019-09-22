@@ -20,6 +20,8 @@ class MainMenu(arcade.View):
     def __init__(self):
         '''
         Constructs a MainMenu Object
+
+        :pre: an Arcade window object exists so a View can be displayed on it
         '''
         super().__init__()
         self.button_list = []
@@ -31,12 +33,16 @@ class MainMenu(arcade.View):
     def on_show(self):
         '''
         Ran when view is intially rendered
+
+        :post: The View has a background color
         '''
         arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
     def on_draw(self):
         '''
         Ran when view is rendered to the screen
+
+        :post: The text and buttons are now on the screen
         '''
         arcade.start_render()
         arcade.draw_text("Welcome to KRAAG Battleship!", SCREEN_WIDTH/2, SCREEN_HEIGHT/2,
@@ -50,6 +56,8 @@ class MainMenu(arcade.View):
         :param: x (int): the x position of the mouse
         :param: y (int): the y position of the mouse
         :return: returns none.
+
+        :post: Checks to see if a button was pressed by doing check_mouse_press_for_buttons
         """
         check_mouse_press_for_buttons(x, y, self.button_list)
 
@@ -59,6 +67,8 @@ class MainMenu(arcade.View):
         :param: x (int): the x position of the mouse
         :param: y (int): the y position of the mouse
         :return: returns none.
+
+        :post: Checks to see if a button was release by doing check_mouse_release_for_buttons
         """
         check_mouse_release_for_buttons(x, y, self.button_list)
 
@@ -66,6 +76,8 @@ class MainMenu(arcade.View):
         """
         Advances the game state.
         :return: returns none.
+
+        :post: The game state advances to selecting how many ships the users want by changing the view to NumberShips
         """
         ship_num_view = NumberShips()
         self.window.show_view(ship_num_view)
@@ -75,6 +87,8 @@ class MainMenu(arcade.View):
         """
         Closes the game.
         :return: returns none.
+
+        :post: The window closes and the program ends
         """
         arcade.close_window()
         sys.exit() #forcibly exits the python program so no futher windows open

@@ -8,9 +8,6 @@ from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
 from gui_shiplocations import ShipPlacementView
 
-# SCREEN_WIDTH = 800
-# SCREEN_HEIGHT = 600
-
 # Set how many rows and columns we will have
 ROW_COUNT = 8
 COLUMN_COUNT = 8
@@ -40,6 +37,8 @@ class NumberShips(arcade.View):
         """
         Constructs a new MainMenuGUI object and sets the background color of the window.
         :return: returns none.
+
+        :pre: The MainMenu class has been run and the user pressed the play_button
         """
         super().__init__()
         self.button_list = []
@@ -58,12 +57,14 @@ class NumberShips(arcade.View):
     def on_show(self):
         '''
         Ran when view is intially drawn to screen
+        :post: The View has a background color
         '''
         arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
     def on_draw(self):
         '''
         Ran when view is rendered
+        :post: The text and buttons are now on the screen
         '''
         arcade.start_render()
         arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/1.80, SCREEN_HEIGHT/2,
@@ -76,6 +77,8 @@ class NumberShips(arcade.View):
         Called whenever the mouse moves
         :param: x (int): the x position of the mouse
         :param: y (int): the y position of the mouse
+
+        :post: Checks to see if a button was pressed by doing check_mouse_press_for_buttons
         """
         check_mouse_press_for_buttons(x, y, self.button_list)
 
@@ -84,13 +87,17 @@ class NumberShips(arcade.View):
         Called whenever the released the mouse
         :param: x (int): the x position of the mouse
         :param: y (int): the y position of the mouse
+
+        :post: Checks to see if a button was release by doing check_mouse_release_for_buttons
         """
         check_mouse_release_for_buttons(x, y, self.button_list)
 
     def number_1(self):
         """
-        return 1 to the next window
-        :return: 1 (int)
+        Advances the game state by setting the view to ShipPlacementView and creates two instances of Player with 1 ship
+        :return: none
+
+        :post: The game state advances by creating two instances of Player with the correct number of ships and by passing these players into an instance of ShipPlacementView
         """
         num_of_ships = 1
         player1 = player.Player(num_of_ships)
@@ -100,8 +107,10 @@ class NumberShips(arcade.View):
 
     def number_2(self):
         """
-        return 2 to the next window
-        :return: 2 (int)
+        Advances the game state by setting the view to ShipPlacementView and creates two instances of Player with 2 ships
+        :return: none
+
+        :post: The game state advances by creating two instances of Player with the correct number of ships and by passing these players into an instance of ShipPlacementView
         """
         num_of_ships = 2
         player1 = player.Player(num_of_ships)
@@ -111,8 +120,10 @@ class NumberShips(arcade.View):
 
     def number_3(self):
         """
-        return 3 to the next window
-        :return: 3 (int)
+        Advances the game state by setting the view to ShipPlacementView and creates two instances of Player with 3 ships
+        :return: none
+
+        :post: The game state advances by creating two instances of Player with the correct number of ships and by passing these players into an instance of ShipPlacementView
         """
         num_of_ships = 3
         player1 = player.Player(num_of_ships)
@@ -122,8 +133,10 @@ class NumberShips(arcade.View):
 
     def number_4(self):
         """
-        return 4 to the next window
-        :return: 4 (int)
+        Advances the game state by setting the view to ShipPlacementView and creates two instances of Player with 4 ships
+        :return: none
+
+        :post: The game state advances by creating two instances of Player with the correct number of ships and by passing these players into an instance of ShipPlacementView
         """
         num_of_ships = 4
         player1 = player.Player(num_of_ships)
@@ -133,8 +146,10 @@ class NumberShips(arcade.View):
 
     def number_5(self):
         """
-        return 5 to the next window
-        :return: 5 (int)
+        Advances the game state by setting the view to ShipPlacementView and creates two instances of Player with 5 ships
+        :return: none
+
+        :post: The game state advances by creating two instances of Player with the correct number of ships and by passing these players into an instance of ShipPlacementView
         """
         num_of_ships = 5
         player1 = player.Player(num_of_ships)
