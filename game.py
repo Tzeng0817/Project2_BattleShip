@@ -21,6 +21,8 @@ class Game:
     def __init__(self, player1: Player, player2: Player):
         """
         Constructs a new Game object. creates and instance of the main menu window.
+        :param: player1 (Player) - player 1 in the game
+        :param: player2 (Player) - player 2 in the game
         :return: returns none.
         """
 

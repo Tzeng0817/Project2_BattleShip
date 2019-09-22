@@ -23,6 +23,7 @@ SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON
 SCREEN_TITLE = "Ship Placement"
 
+
 class ShipPlacementView(arcade.View):
     """
     View for placing ships on a board
@@ -95,6 +96,7 @@ class ShipPlacementView(arcade.View):
             arcade.draw_text(letters[i], (i * WIDTH) + 70, SCREEN_WIDTH - 20, arcade.color.WHITE)
             arcade.draw_text(numbers[i], OFFSET_AXIS_LABEL / 2, (i * HEIGHT) + 70, arcade.color.WHITE)
         self.shape_list.draw()
+        arcade.draw_text("Press SPACE to rotate, ENTER to lock in the ship", SCREEN_WIDTH/1.9, 730, arcade.color.WHITE, 30, anchor_x="center")
 
     def on_mouse_press(self, x, y, button, modifiers):
         """

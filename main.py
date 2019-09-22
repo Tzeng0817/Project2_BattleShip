@@ -1,6 +1,4 @@
 import arcade
-
-import arcade
 import gui_main_menu
 
 SCREEN_WIDTH = 800
