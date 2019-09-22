@@ -34,7 +34,11 @@ class Board:
         """
         Handles board setup for placing ships
         :return: returns none.
+
+        :pre: length, origin, and direction are valid
+        :post: Appends a ship with the specified fields to the self.ships list
         """
+        
         self.ships.append(Ship(length, origin, direction))
 
     def attacked(self, x_pos: int, y_pos: int) -> bool:

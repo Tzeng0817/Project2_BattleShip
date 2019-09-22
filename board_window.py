@@ -34,6 +34,7 @@ class BoardWindow(arcade.View):
         :param: on_end (Function): Function to call when a turn ends
         :param: is_own_board (Bool): Is this board owned by the player it refers to
         :return: None
+        :pre: Player has been initalized with ships already placed
         '''
 
         super().__init__()
@@ -52,6 +53,7 @@ class BoardWindow(arcade.View):
         Rebuild grid based on updated player data
 
         :returns: None
+        :post: self.shape_list is updated to reflect the changing player board underneath
         '''
 
         self.shape_list = arcade.ShapeElementList()
@@ -99,6 +101,8 @@ class BoardWindow(arcade.View):
         :param: x (int): x location of the click
         :param: y (int): y location of the click
         :returns: None
+
+        :post: Could end turn if the press was valid
         """
 
         if self.is_own_board:

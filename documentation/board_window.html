@@ -60,7 +60,8 @@ Methods defined here:<br>
 :param:&nbsp;player&nbsp;(Player):&nbsp;Player&nbsp;data&nbsp;this&nbsp;board&nbsp;shows<br>
 :param:&nbsp;on_end&nbsp;(Function):&nbsp;Function&nbsp;to&nbsp;call&nbsp;when&nbsp;a&nbsp;turn&nbsp;ends<br>
 :param:&nbsp;is_own_board&nbsp;(Bool):&nbsp;Is&nbsp;this&nbsp;board&nbsp;owned&nbsp;by&nbsp;the&nbsp;player&nbsp;it&nbsp;refers&nbsp;to<br>
-:return:&nbsp;None</tt></dd></dl>
+:return:&nbsp;None<br>
+:pre:&nbsp;Player&nbsp;has&nbsp;been&nbsp;initalized&nbsp;with&nbsp;ships&nbsp;already&nbsp;placed</tt></dd></dl>
 
 <dl><dt><a name="BoardWindow-on_draw"><strong>on_draw</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;class&nbsp;to&nbsp;the&nbsp;screen</tt></dd></dl>
 
@@ -68,11 +69,14 @@ Methods defined here:<br>
 &nbsp;<br>
 :param:&nbsp;x&nbsp;(int):&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;click<br>
 :param:&nbsp;y&nbsp;(int):&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;click<br>
-:returns:&nbsp;None</tt></dd></dl>
+:returns:&nbsp;None<br>
+&nbsp;<br>
+:post:&nbsp;Could&nbsp;end&nbsp;turn&nbsp;if&nbsp;the&nbsp;press&nbsp;was&nbsp;valid</tt></dd></dl>
 
 <dl><dt><a name="BoardWindow-recreate_grid"><strong>recreate_grid</strong></a>(self)</dt><dd><tt>Rebuild&nbsp;grid&nbsp;based&nbsp;on&nbsp;updated&nbsp;player&nbsp;data<br>
 &nbsp;<br>
-:returns:&nbsp;None</tt></dd></dl>
+:returns:&nbsp;None<br>
+:post:&nbsp;self.<strong>shape_list</strong>&nbsp;is&nbsp;updated&nbsp;to&nbsp;reflect&nbsp;the&nbsp;changing&nbsp;player&nbsp;board&nbsp;underneath</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="arcade.application.html#View">arcade.application.View</a>:<br>

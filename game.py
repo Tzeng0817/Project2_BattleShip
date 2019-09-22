@@ -24,6 +24,8 @@ class Game:
         :param: player1 (Player) - player 1 in the game
         :param: player2 (Player) - player 2 in the game
         :return: returns none.
+
+        :pre: Both Player s have been initalized already with ships placed
         """
 
         print("Making game")
@@ -55,6 +57,8 @@ class Game:
         """
         Shows the endgame screen and announces the winner
         :return: returns none.
+
+        :post: Application exists
         """
 
         self.game_over = True
@@ -76,6 +80,7 @@ class Game:
         Handles switching player states at the end of a turn
 
         :return: None
+        :post: Switches current player and toggles self.turn_over
         '''
         if self.current_player == self.player1:
             self.current_player = self.player2
@@ -89,6 +94,8 @@ class Game:
         """
         Handles the flow of the game and deciding when to switch turns
         :return: returns none
+
+        :post: If between turns swaps what board is viewed, If game is over, ends game
         """
         if ((not self.player1.has_lost()) or (not self.player2.has_lost())) and self.turn_over:
             if self.current_player == self.player1:
