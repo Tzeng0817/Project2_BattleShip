@@ -3,7 +3,7 @@ import player
 from button import TextButton
 from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
-from gui_shiplocations import ShipLocations
+from gui_shiplocations import ShipPlacementView
 
 # SCREEN_WIDTH = 800
 # SCREEN_HEIGHT = 600
@@ -83,7 +83,7 @@ class NumberShips(arcade.View):
         num_of_ships = 1
         player1 = player.Player(num_of_ships)
         player2 = player.Player(num_of_ships)
-        place_ships_view = ShipLocations()
+        place_ships_view = ShipPlacementView(player1)
         self.window.show_view(place_ships_view)
 
     def number_2(self):
@@ -94,7 +94,7 @@ class NumberShips(arcade.View):
         num_of_ships = 2
         player1 = player.Player(num_of_ships)
         player2 = player.Player(num_of_ships)
-        place_ships_view = ShipLocations()
+        place_ships_view = ShipPlacementView(player1)
         self.window.show_view(place_ships_view)
 
     def number_3(self):
@@ -105,7 +105,7 @@ class NumberShips(arcade.View):
         num_of_ships = 3
         player1 = player.Player(num_of_ships)
         player2 = player.Player(num_of_ships)
-        place_ships_view = ShipLocations()
+        place_ships_view = ShipPlacementView(player1)
         self.window.show_view(place_ships_view)
 
     def number_4(self):
@@ -116,7 +116,7 @@ class NumberShips(arcade.View):
         num_of_ships = 4
         player1 = player.Player(num_of_ships)
         player2 = player.Player(num_of_ships)
-        place_ships_view = ShipLocations()
+        place_ships_view = ShipPlacementView(player1)
         self.window.show_view(place_ships_view)
 
     def number_5(self):
@@ -127,7 +127,7 @@ class NumberShips(arcade.View):
         num_of_ships = 5
         player1 = player.Player(num_of_ships)
         player2 = player.Player(num_of_ships)
-        place_ships_view = ShipLocations()
+        place_ships_view = ShipPlacementView(player1)
         self.window.show_view(place_ships_view)
 
 

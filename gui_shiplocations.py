@@ -36,7 +36,7 @@ class ShipPlacementView(arcade.View):
         #initialized global variables
         self.player = player
         self.shape_list = None
-        self.length_of_ship = 5
+        self.length_of_ship = player.num_of_ships
         self.selected = False
         self.row = 0
         self.column = 0
