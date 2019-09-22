@@ -1,14 +1,11 @@
-"""""
-Handles placing ships in its own View.
-Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
-"""""
 
+
+"""""
+Need a player passed to me with number of player
+"""""
 import arcade
-from game import Game
 from board import Board
 from ship import Ship, Direction
-from player import Player
-
 # Set how many rows and columns we will have
 ROW_COUNT = 8
 COLUMN_COUNT = 8
@@ -24,30 +21,28 @@ OFFSET_BUTTON = 100
 # Do the math to figure out our screen dimensions
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON
-SCREEN_TITLE = "Ship Placement"
+SCREEN_TITLE = "BATTLESHIP"
 
-
-class ShipPlacementView(arcade.View):
+class SHIP_LOCATION_SETUP(arcade.Window):
     """
-    View for placing ships on a board
+    Main application class.
     """
 
-    def __init__(self, player: Player):
+    def __init__(self, width, height, title):
         """
         Application constructor.
-        :param: width(int) - width of window
-        :param: height(int) - height of window
-        :param: title (string) - title of window
         """
-        super().__init__()
+        super().__init__(width, height, title)
         #initialized global variables
-        self.player = player
+        self.board = Board()
         self.shape_list = None
-        self.length_of_ship = player.num_of_ships
+        self.length_of_ship = 5
         self.selected = False
         self.row = 0
         self.column = 0
         self.direction = Direction.RIGHT
+        #test temp list saving coordinates code
+        self.temp_ship_list = []
         # Create a 2 dimensional array. A two dimensional
         # array is simply a list of lists.
         self.grid = []
@@ -57,14 +52,9 @@ class ShipPlacementView(arcade.View):
             self.grid.append([])
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)  # Append a cell
-        self.recreate_grid()
-
-    def on_show(self):
-        """
-        Sets background color to black
-        """
         #set background color to black
         arcade.set_background_color(arcade.color.BLACK)
+        self.recreate_grid()
 
     def recreate_grid(self):
         """
@@ -99,32 +89,21 @@ class ShipPlacementView(arcade.View):
             arcade.draw_text(letters[i], (i * WIDTH) + 70, SCREEN_WIDTH - 20, arcade.color.WHITE)
             arcade.draw_text(numbers[i], OFFSET_AXIS_LABEL / 2, (i * HEIGHT) + 70, arcade.color.WHITE)
         self.shape_list.draw()
-        arcade.draw_text("Press SPACE to rotate, ENTER to lock in the ship", SCREEN_WIDTH/1.9, 730, arcade.color.WHITE, 28, anchor_x="center")
-        if self.length_of_ship == 0:
-            dummy_view = DummyView()
-            DummyView.players.append(self.player)
-            self.window.show_view(dummy_view)
 
     def on_mouse_press(self, x, y, button, modifiers):
         """
         Called when the user presses a mouse button.
-        :param: x (int) - x location of mouse press
-        :param: y (int) - y location of mouse press
-        :param: button (button) - button of mouse press
-        :param: modifiers - life cycle method
         """
         # Change the x/y screen coordinates to grid coordinates
         self.column = (x - OFFSET_AXIS_LABEL) // (WIDTH + MARGIN)
         self.row = y // (HEIGHT + MARGIN)
-        if self.column >= 8 or self.row >= 8 or self.column < 0 or self.row < 0:
-            return
-
         row = self.row
         column = self.column
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
         # Make sure initial mouse press is on grid
         if row < ROW_COUNT and column < COLUMN_COUNT:
             i = 0
+            j = 0
             #allows selection of location of ship to be horizontal
             if self.direction == Direction.RIGHT:
                 #if grid cell is white with no ship currently placed, change grid cells to selected based on
@@ -133,6 +112,9 @@ class ShipPlacementView(arcade.View):
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT and (column + self.length_of_ship - 1) < COLUMN_COUNT:
                             self.grid[row][column + i] = 1
+                            #test temp list saving coordinates code
+                            self.temp_ship_list.append((row, column+i))
+                            print (self.temp_ship_list)
                             self.selected = True
                         else:
                             print(f"invalid placement")
@@ -140,15 +122,22 @@ class ShipPlacementView(arcade.View):
                             break
                 #if grid cell is red and ship is selected make current selection ship cells white again and
                 #changed selection back to not selection
-                # elif self.grid[row][column] == 1 and self.selected:
-                #     for i in range(self.length_of_ship):
-                #         if row < ROW_COUNT and column < COLUMN_COUNT and (column + self.length_of_ship - 1) < COLUMN_COUNT:
-                #             self.grid[row][column + i] = 0
-                #             self.selected = False
-                #         else:
-                #             print(f"offscreen redo")
-                #             self.selected = False
-                #             break
+                elif self.grid[row][column] == 1 and self.selected:
+                    if ((row, column) in (self.temp_ship_list)):
+                        print("true")
+                        p=0
+                        for p in range(self.temp_ship_list.__sizeof__()-1):
+                            self.grid[row][column + p] = 0
+
+                    # for i in range(self.length_of_ship):
+                    #     if row < ROW_COUNT and column < COLUMN_COUNT and (column + self.length_of_ship - 1) < COLUMN_COUNT:
+                    #         self.grid[row][column + i] = 0
+                    #         self.selected = False
+
+                    else:
+                        print(f"offscreen redo")
+                        self.selected = False
+                        #break
                 #if grid cell selected is white and a ship location has already been selected
                 #then do not select another ship
                 elif self.grid[row][column] == 0 and self.selected:
@@ -193,30 +182,22 @@ class ShipPlacementView(arcade.View):
         self.recreate_grid()
 
     def on_key_press(self, key, modifiers):
-        """
-        Called whenever a key is pressed. 
-        :param: key (key) - key pressed 
-        :param: modifiers - life cycle method
-        """
+        """Called whenever a key is pressed. """
         #sets the location of first ship in board class when enter key is pressed and then remaining
         #ships as they are looped through
         if key == arcade.key.ENTER:
             if self.selected:
                 self.selected = False
                 print(self.row, self.column)
-                self.player.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
+                self.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
                 #loops through the remaining ships in decreasing length
                 if self.length_of_ship > 0:
                     self.length_of_ship = self.length_of_ship - 1
                     self.row = 0
                     self.column = 0
-                    print(self.player.board.get_board_view()[1])
-
+                    print(self.board.get_board_view()[1])
             else:
-                if self.length_of_ship == 0 :
-                    print(f"All ships placed")
-                else:
-                    print(f"please place ship")
+                print(f"please place ship")
         #allows the orientation of the ship placement to change between horizontal and vertical
         #when space bar is pushed and a ship is not currently selected
         if key == arcade.key.SPACE and not self.selected:
@@ -231,36 +212,9 @@ class ShipPlacementView(arcade.View):
         elif key == arcade.key.SPACE and self.selected:
             print(f"cannot change direction while ship is selected")
 
+def main():
+    SHIP_LOCATION_SETUP(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    arcade.run()
 
-class DummyView(arcade.View):
-    iterations = 0
-    players = []
-    has_ran = False
-    def __init__(self):
-        super().__init__()
-        DummyView.iterations += 1
-
-    def on_show(self):
-        arcade.set_background_color(arcade.color.ORANGE_PEEL)
-
-    def on_draw(self):
-        arcade.start_render()
-        if (DummyView.iterations == 2):
-            arcade.draw_text("Starting Game", 140, 450, arcade.color.WHITE, 54)
-            arcade.draw_text("Click when Player 1 is ready to play", 180, 400, arcade.color.WHITE, 25)
-        else:
-            arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
-            arcade.draw_text("Click when next player is ready", 180, 400, arcade.color.WHITE, 25)
-
-    def on_mouse_press(self, x, y, button, modifiers):
-        player2 = Player(DummyView.players[0].num_of_ships)
-        next_player_ships_placement = ShipPlacementView(player2)
-        self.window.show_view(next_player_ships_placement)
-        if (DummyView.iterations == 2 and not DummyView.has_ran):
-            arcade.get_window().set_visible(False)
-            player1 = DummyView.players[0]
-            player2 = DummyView.players[1]
-            GAME = Game(player1, player2)
-            arcade.set_window(GAME.player1_other_board)
-            arcade.schedule(GAME.run, 0.25)
-            DummyView.has_ran = True
+if __name__ == "__main__":
+    main()
