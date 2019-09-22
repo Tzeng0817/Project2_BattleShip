@@ -96,7 +96,10 @@ class ShipPlacementView(arcade.View):
             arcade.draw_text(letters[i], (i * WIDTH) + 70, SCREEN_WIDTH - 20, arcade.color.WHITE)
             arcade.draw_text(numbers[i], OFFSET_AXIS_LABEL / 2, (i * HEIGHT) + 70, arcade.color.WHITE)
         self.shape_list.draw()
-        arcade.draw_text("Press SPACE to rotate, ENTER to lock in the ship", SCREEN_WIDTH/1.9, 730, arcade.color.WHITE, 30, anchor_x="center")
+        arcade.draw_text("Press SPACE to rotate, ENTER to lock in the ship", SCREEN_WIDTH/1.9, 730, arcade.color.WHITE, 28, anchor_x="center")
+        if self.length_of_ship == 0:
+            dummy_view = DummyView()
+            self.window.show_view(dummy_view)
 
     def on_mouse_press(self, x, y, button, modifiers):
         """
@@ -109,6 +112,9 @@ class ShipPlacementView(arcade.View):
         # Change the x/y screen coordinates to grid coordinates
         self.column = (x - OFFSET_AXIS_LABEL) // (WIDTH + MARGIN)
         self.row = y // (HEIGHT + MARGIN)
+        if self.column >= 8 or self.row >= 8:
+            return
+
         row = self.row
         column = self.column
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
@@ -201,8 +207,12 @@ class ShipPlacementView(arcade.View):
                     self.row = 0
                     self.column = 0
                     print(self.player.board.get_board_view()[1])
+
             else:
-                print(f"please place ship")
+                if self.length_of_ship == 0 :
+                    print(f"All ships placed")
+                else:
+                    print(f"please place ship")
         #allows the orientation of the ship placement to change between horizontal and vertical
         #when space bar is pushed and a ship is not currently selected
         if key == arcade.key.SPACE and not self.selected:
@@ -216,3 +226,21 @@ class ShipPlacementView(arcade.View):
         #is space bar is pushed while ship is selected, then orientation is not
         elif key == arcade.key.SPACE and self.selected:
             print(f"cannot change direction while ship is selected")
+
+
+class DummyView(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.ORANGE_PEEL)
+
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
+        arcade.draw_text("Click when next player is ready", 180, 400, arcade.color.WHITE, 25)
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        player2 = Player(5)
+        next_player_ships_placement = ShipPlacementView(player2)
+        self.window.show_view(next_player_ships_placement)

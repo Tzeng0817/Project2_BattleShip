@@ -156,7 +156,7 @@ class TextButton(Button):
         :param: action_function: The function that is executed when the button is pressed.
         :return: returns none.
         """
-        super().__init__(center_x, center_y, 100, 40, text, 18, "Arial")
+        super().__init__(center_x, center_y, 65, 40, text, 18, "Arial")
         self.action_function = action_function
 
     def on_release(self):
