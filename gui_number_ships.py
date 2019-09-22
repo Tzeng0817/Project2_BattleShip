@@ -36,11 +36,11 @@ class NumberShips(arcade.View):
         """
         super().__init__()
         self.button_list = []
-        self.button_1 = TextButton(110, 260, self.number_1, "1")
-        self.button_2 = TextButton(250, 260, self.number_2, "2")
-        self.button_3 = TextButton(390, 260, self.number_3, "3")
-        self.button_4 = TextButton(530, 260, self.number_4, "4")
-        self.button_5 = TextButton(670, 260, self.number_5, "5")
+        self.button_1 = TextButton(110, 320, self.number_1, "1")
+        self.button_2 = TextButton(250, 320, self.number_2, "2")
+        self.button_3 = TextButton(390, 320, self.number_3, "3")
+        self.button_4 = TextButton(530, 320, self.number_4, "4")
+        self.button_5 = TextButton(670, 320, self.number_5, "5")
 
         self.button_list.append(self.button_1)
         self.button_list.append(self.button_2)
@@ -53,7 +53,7 @@ class NumberShips(arcade.View):
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/2, SCREEN_HEIGHT/2,
+        arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/1.80, SCREEN_HEIGHT/2,
                          arcade.color.BLACK, font_size=45, anchor_x="center")
 
         for element in self.button_list:
