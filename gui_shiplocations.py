@@ -4,6 +4,7 @@ Heavily modified version of http://arcade.academy/examples/array_backed_grid_buf
 """""
 
 import arcade
+from game import Game
 from board import Board
 from ship import Ship, Direction
 from player import Player
@@ -101,6 +102,7 @@ class ShipPlacementView(arcade.View):
         arcade.draw_text("Press SPACE to rotate, ENTER to lock in the ship", SCREEN_WIDTH/1.9, 730, arcade.color.WHITE, 28, anchor_x="center")
         if self.length_of_ship == 0:
             dummy_view = DummyView()
+            DummyView.players.append(self.player)
             self.window.show_view(dummy_view)
 
     def on_mouse_press(self, x, y, button, modifiers):
@@ -231,18 +233,30 @@ class ShipPlacementView(arcade.View):
 
 
 class DummyView(arcade.View):
+    iterations = 0
+    players = []
     def __init__(self):
         super().__init__()
+        DummyView.iterations += 1
 
     def on_show(self):
         arcade.set_background_color(arcade.color.ORANGE_PEEL)
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
-        arcade.draw_text("Click when next player is ready", 180, 400, arcade.color.WHITE, 25)
+        if (DummyView.iterations == 2):
+            arcade.draw_text("Starting Game", 140, 450, arcade.color.WHITE, 54)
+            arcade.draw_text("Click when Player 1 is ready to play", 180, 400, arcade.color.WHITE, 25)
+        else:
+            arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
+            arcade.draw_text("Click when next player is ready", 180, 400, arcade.color.WHITE, 25)
 
     def on_mouse_press(self, x, y, button, modifiers):
-        player2 = Player(5)
+        player2 = Player(DummyView.players[0].num_of_ships)
         next_player_ships_placement = ShipPlacementView(player2)
         self.window.show_view(next_player_ships_placement)
+        if (DummyView.iterations == 2):
+            player1 = DummyView.players[0]
+            player2 = DummyView.players[1]
+            GAME = Game(player1, player2)
+            arcade.schedule(GAME.run, 0.25)

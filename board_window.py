@@ -94,7 +94,7 @@ class BoardWindow(arcade.Window):
 
     def on_mouse_press(self, x, y, _, __):
         """
-        Handles user shooting at a grid cell including playing sonuds
+        Handles user shooting at a grid cell including playing sounds
 
         :param: x (int): x location of the click
         :param: y (int): y location of the click
