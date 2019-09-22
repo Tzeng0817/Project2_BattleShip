@@ -1,4 +1,3 @@
-import gui_main_menu
 import arcade
 
 import arcade
