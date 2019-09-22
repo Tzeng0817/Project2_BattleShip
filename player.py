@@ -1,4 +1,6 @@
-##Player
+"""
+Player module containing the Player class. Manages if the player has lost or not.
+"""
 from board import Board
 
 class Player():
@@ -6,8 +8,6 @@ class Player():
     def __init__(self, num_of_ships):
         """
         Constructs a player object
-
-        :param: name (string): gets us the name of the player (Player 1/2)
         :param: num_of_ships (int): gives us the player's shape
         :return: returns none
         """
@@ -33,6 +33,8 @@ class Player():
     def be_attacked(self, x_pos: int, y_pos: int) -> bool:
         """
         Decrements amount of ship blocks available when player is attacked
+        :param: x_pos (int): the x position of the mouse click
+        :param: y_pos (int): the y position of the mouse click
         :return: bool - true if hit, false if not
         """
         print(self.total_ship_blocks)
@@ -48,6 +50,7 @@ class Player():
     def get_ship_blocks(self, num_of_ships):
         """
         Calculates amount of ship blocks available to player
+        :param: num_of_ships (int): how many ships the player has
         :return: int - amount of ship blocks player has
         """
         sum = 0

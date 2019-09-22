@@ -1,6 +1,6 @@
 """
-buttons module contains the TextButton class for creating buttons with text in them. It also contains
-the funtions check_mouse_press_for_buttons and check_mouse_release_for_buttons which check if a button was pressed.
+button module contains the TextButton class for creating buttons with text in them. It also contains
+the functions check_mouse_press_for_buttons and check_mouse_release_for_buttons which check if a button was pressed.
 It also contains several classes of specific buttons used throughout the program.
 The code for the TextButton class and the functions check_mouse_press_for_buttons and check_mouse_release_for_buttons
 was taken from an example in the Arcade documentation: http://arcade.academy/examples/gui_text_button.html
@@ -10,8 +10,7 @@ import arcade
 
 class Button:
     """
-    Button class to make the creation of buttons easier - text based button
-    
+    Button class to make the creation of buttons easier - text based button  
     """
     def __init__(self,
                  center_x, center_y,
@@ -29,10 +28,10 @@ class Button:
         :param: center_y (int) - center location of y coordinate
         :param: width (int) - width of button
         :param: length (int) - length of button
-        :param: text - text that goes on buton
+        :param: text - text that goes on button
         :param: font_face - font of text
         :param: face_color - sets button color to light gray
-        :param: highlight_color - sets highglight color to white
+        :param: highlight_color - sets highlight color to white
         :param: shadow_color - sets shadow color to gray
         :param: button_height (int) - sets height to gray
         """
@@ -51,7 +50,7 @@ class Button:
 
     def draw(self):
         """
-        initiates the button as a rectable with position and 
+        initiates the button as a rectable with position and
         tracks whether or not the given button is pressed and displays corresponding color
         :return: returns none.
         """
