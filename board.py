@@ -34,7 +34,6 @@ class Board:
         """
         Handles board setup for placing ships
         :return: returns none.
-        @TODO: Implement this once UI is complete
         """
         self.ships.append(Ship(length, origin, direction))
 
