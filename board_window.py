@@ -25,7 +25,7 @@ class BoardWindow(arcade.Window):
     def __init__(self, width: int, height: int, title: str, player: Player, on_end, is_own_board: bool):
         '''
         Initialize Board Window
-        
+
         :param: width (int): Width of window
         :param: height (int): Height of window
         :param: title (str): Title for Window

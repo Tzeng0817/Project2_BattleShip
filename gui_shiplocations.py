@@ -1,9 +1,11 @@
 """""
-Need a player passed to me with number of player
+Handles placing ships in its own View
 """""
 import arcade
 from board import Board
 from ship import Ship, Direction
+from player import Player
+
 # Set how many rows and columns we will have
 ROW_COUNT = 8
 COLUMN_COUNT = 8
@@ -19,23 +21,23 @@ OFFSET_BUTTON = 100
 # Do the math to figure out our screen dimensions
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON
-SCREEN_TITLE = "BATTLESHIP"
+SCREEN_TITLE = "Ship Placement"
 
-class SHIP_LOCATION_SETUP(arcade.view):
+class ShipPlacementView(arcade.View):
     """
-    Main application class.
+    View for placing ships on a board
     """
 
-    def __init__(self, width, height, title):
+    def __init__(self, player: Player):
         """
         Application constructor.
         :param: width(int) - width of window
         :param: height(int) - height of window
         :param: title (string) - title of window
         """
-        super().__init__(width, height, title)
+        super().__init__()
         #initialized global variables
-        self.board = Board()
+        self.player = player
         self.shape_list = None
         self.length_of_ship = 5
         self.selected = False
@@ -190,13 +192,13 @@ class SHIP_LOCATION_SETUP(arcade.view):
             if self.selected:
                 self.selected = False
                 print(self.row, self.column)
-                self.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
+                self.player.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
                 #loops through the remaining ships in decreasing length
                 if self.length_of_ship > 0:
                     self.length_of_ship = self.length_of_ship - 1
                     self.row = 0
                     self.column = 0
-                    print(self.board.get_board_view()[1])
+                    print(self.player.board.get_board_view()[1])
             else:
                 print(f"please place ship")
         #allows the orientation of the ship placement to change between horizontal and vertical
@@ -212,10 +214,3 @@ class SHIP_LOCATION_SETUP(arcade.view):
         #is space bar is pushed while ship is selected, then orientation is not
         elif key == arcade.key.SPACE and self.selected:
             print(f"cannot change direction while ship is selected")
-
-# def main():
-#     SHIP_LOCATION_SETUP(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-#     arcade.run()
-#
-# if __name__ == "__main__":
-#     main()
