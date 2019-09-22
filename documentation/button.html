@@ -64,15 +64,23 @@ was&nbsp;taken&nbsp;from&nbsp;an&nbsp;example&nbsp;in&nbsp;the&nbsp;Arcade&nbsp;
 :param:&nbsp;face_color&nbsp;-&nbsp;sets&nbsp;button&nbsp;color&nbsp;to&nbsp;light&nbsp;gray<br>
 :param:&nbsp;highlight_color&nbsp;-&nbsp;sets&nbsp;highlight&nbsp;color&nbsp;to&nbsp;white<br>
 :param:&nbsp;shadow_color&nbsp;-&nbsp;sets&nbsp;shadow&nbsp;color&nbsp;to&nbsp;gray<br>
-:param:&nbsp;button_height&nbsp;(int)&nbsp;-&nbsp;sets&nbsp;height&nbsp;to&nbsp;gray</tt></dd></dl>
+:param:&nbsp;button_height&nbsp;(int)&nbsp;-&nbsp;sets&nbsp;height&nbsp;to&nbsp;gray<br>
+&nbsp;<br>
+:pre:&nbsp;A&nbsp;window&nbsp;or&nbsp;view&nbsp;exists&nbsp;for&nbsp;the&nbsp;button&nbsp;to&nbsp;be&nbsp;created&nbsp;on</tt></dd></dl>
 
 <dl><dt><a name="Button-draw"><strong>draw</strong></a>(self)</dt><dd><tt>initiates&nbsp;the&nbsp;button&nbsp;as&nbsp;a&nbsp;rectable&nbsp;with&nbsp;position&nbsp;and<br>
 tracks&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;given&nbsp;button&nbsp;is&nbsp;pressed&nbsp;and&nbsp;displays&nbsp;corresponding&nbsp;color<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;button&nbsp;is&nbsp;drawn&nbsp;on&nbsp;the&nbsp;window</tt></dd></dl>
 
-<dl><dt><a name="Button-on_press"><strong>on_press</strong></a>(self)</dt><dd><tt>bool&nbsp;controlling&nbsp;whether&nbsp;the&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;not</tt></dd></dl>
+<dl><dt><a name="Button-on_press"><strong>on_press</strong></a>(self)</dt><dd><tt>bool&nbsp;controlling&nbsp;whether&nbsp;the&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;not<br>
+&nbsp;<br>
+:post:&nbsp;self.<strong>pressed</strong>&nbsp;is&nbsp;true,&nbsp;allowing&nbsp;draw&nbsp;to&nbsp;know&nbsp;that&nbsp;it&nbsp;needs&nbsp;to&nbsp;do&nbsp;the&nbsp;clicked&nbsp;animation</tt></dd></dl>
 
-<dl><dt><a name="Button-on_release"><strong>on_release</strong></a>(self)</dt><dd><tt>bool&nbsp;checking&nbsp;whether&nbsp;button&nbsp;is&nbsp;released</tt></dd></dl>
+<dl><dt><a name="Button-on_release"><strong>on_release</strong></a>(self)</dt><dd><tt>bool&nbsp;checking&nbsp;whether&nbsp;button&nbsp;is&nbsp;released<br>
+&nbsp;<br>
+:post:&nbsp;self.<strong>pressed</strong>&nbsp;is&nbsp;False,&nbsp;allowing&nbsp;draw&nbsp;to&nbsp;know&nbsp;that&nbsp;it&nbsp;needs&nbsp;to&nbsp;do&nbsp;the&nbsp;release&nbsp;animation</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -104,17 +112,26 @@ Methods defined here:<br>
 :param:&nbsp;center_x&nbsp;(int):&nbsp;x&nbsp;position&nbsp;of&nbsp;where&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;button&nbsp;is&nbsp;so&nbsp;the&nbsp;textbutton&nbsp;class&nbsp;can&nbsp;draw&nbsp;it.<br>
 :param:&nbsp;center_y&nbsp;(int):&nbsp;y&nbsp;position&nbsp;of&nbsp;where&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;button&nbsp;is&nbsp;so&nbsp;the&nbsp;textbutton&nbsp;class&nbsp;can&nbsp;draw&nbsp;it.<br>
 :param:&nbsp;action_function:&nbsp;The&nbsp;function&nbsp;that&nbsp;is&nbsp;executed&nbsp;when&nbsp;the&nbsp;button&nbsp;is&nbsp;pressed.<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:pre:&nbsp;A&nbsp;window&nbsp;or&nbsp;view&nbsp;exists&nbsp;for&nbsp;the&nbsp;button&nbsp;to&nbsp;be&nbsp;created&nbsp;on</tt></dd></dl>
 
-<dl><dt><a name="TextButton-on_release"><strong>on_release</strong></a>(self)</dt><dd><tt>implements&nbsp;methods&nbsp;necessary&nbsp;when&nbsp;button&nbsp;is&nbsp;released</tt></dd></dl>
+<dl><dt><a name="TextButton-on_release"><strong>on_release</strong></a>(self)</dt><dd><tt>implements&nbsp;methods&nbsp;necessary&nbsp;when&nbsp;button&nbsp;is&nbsp;released<br>
+:return:&nbsp;none<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;action_function&nbsp;is&nbsp;executed</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="button.html#Button">Button</a>:<br>
 <dl><dt><a name="TextButton-draw"><strong>draw</strong></a>(self)</dt><dd><tt>initiates&nbsp;the&nbsp;button&nbsp;as&nbsp;a&nbsp;rectable&nbsp;with&nbsp;position&nbsp;and<br>
 tracks&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;given&nbsp;button&nbsp;is&nbsp;pressed&nbsp;and&nbsp;displays&nbsp;corresponding&nbsp;color<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;button&nbsp;is&nbsp;drawn&nbsp;on&nbsp;the&nbsp;window</tt></dd></dl>
 
-<dl><dt><a name="TextButton-on_press"><strong>on_press</strong></a>(self)</dt><dd><tt>bool&nbsp;controlling&nbsp;whether&nbsp;the&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;not</tt></dd></dl>
+<dl><dt><a name="TextButton-on_press"><strong>on_press</strong></a>(self)</dt><dd><tt>bool&nbsp;controlling&nbsp;whether&nbsp;the&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;not<br>
+&nbsp;<br>
+:post:&nbsp;self.<strong>pressed</strong>&nbsp;is&nbsp;true,&nbsp;allowing&nbsp;draw&nbsp;to&nbsp;know&nbsp;that&nbsp;it&nbsp;needs&nbsp;to&nbsp;do&nbsp;the&nbsp;clicked&nbsp;animation</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="button.html#Button">Button</a>:<br>
@@ -134,11 +151,15 @@ Data descriptors inherited from <a href="button.html#Button">Button</a>:<br>
 <td width="100%"><dl><dt><a name="-check_mouse_press_for_buttons"><strong>check_mouse_press_for_buttons</strong></a>(x, y, button_list)</dt><dd><tt>Given&nbsp;an&nbsp;x,&nbsp;y,&nbsp;see&nbsp;if&nbsp;we&nbsp;need&nbsp;to&nbsp;register&nbsp;any&nbsp;button&nbsp;clicks.&nbsp;<br>
 :param:&nbsp;x&nbsp;(int)&nbsp;-&nbsp;x&nbsp;position&nbsp;of&nbsp;mousepress<br>
 :param:&nbsp;y&nbsp;(int)&nbsp;-&nbsp;y&nbsp;position&nbsp;of&nbsp;mousepress<br>
-:param:&nbsp;button_list&nbsp;-&nbsp;contains&nbsp;list&nbsp;of&nbsp;buttons&nbsp;to&nbsp;search&nbsp;through</tt></dd></dl>
+:param:&nbsp;button_list&nbsp;-&nbsp;contains&nbsp;list&nbsp;of&nbsp;buttons&nbsp;to&nbsp;search&nbsp;through<br>
+&nbsp;<br>
+:post:&nbsp;the&nbsp;button&nbsp;now&nbsp;knows&nbsp;whether&nbsp;it&nbsp;was&nbsp;pressed&nbsp;or&nbsp;not</tt></dd></dl>
  <dl><dt><a name="-check_mouse_release_for_buttons"><strong>check_mouse_release_for_buttons</strong></a>(x, y, button_list)</dt><dd><tt>If&nbsp;a&nbsp;mouse&nbsp;button&nbsp;has&nbsp;been&nbsp;released,&nbsp;see&nbsp;if&nbsp;we&nbsp;need&nbsp;to&nbsp;process<br>
 any&nbsp;release&nbsp;events.&nbsp;<br>
 :param:&nbsp;x&nbsp;(int)&nbsp;-&nbsp;x&nbsp;position&nbsp;of&nbsp;mousepress<br>
 :param:&nbsp;y&nbsp;(int)&nbsp;-&nbsp;y&nbsp;position&nbsp;of&nbsp;mousepress<br>
-:param:&nbsp;button_list&nbsp;-&nbsp;contains&nbsp;list&nbsp;of&nbsp;buttons&nbsp;to&nbsp;search&nbsp;through</tt></dd></dl>
+:param:&nbsp;button_list&nbsp;-&nbsp;contains&nbsp;list&nbsp;of&nbsp;buttons&nbsp;to&nbsp;search&nbsp;through<br>
+&nbsp;<br>
+:post:&nbsp;Any&nbsp;relevent&nbsp;functions&nbsp;associated&nbsp;with&nbsp;the&nbsp;pressed&nbsp;button&nbsp;are&nbsp;executed</tt></dd></dl>
 </td></tr></table>
 </body></html>

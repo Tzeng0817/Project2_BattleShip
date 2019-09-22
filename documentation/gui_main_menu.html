@@ -51,29 +51,43 @@ The&nbsp;basic&nbsp;architecture&nbsp;for&nbsp;the&nbsp;code&nbsp;was&nbsp;taken
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="MainMenu-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructs&nbsp;a&nbsp;<a href="#MainMenu">MainMenu</a>&nbsp;Object</tt></dd></dl>
+<dl><dt><a name="MainMenu-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructs&nbsp;a&nbsp;<a href="#MainMenu">MainMenu</a>&nbsp;Object<br>
+&nbsp;<br>
+:pre:&nbsp;an&nbsp;Arcade&nbsp;window&nbsp;object&nbsp;exists&nbsp;so&nbsp;a&nbsp;<a href="arcade.application.html#View">View</a>&nbsp;can&nbsp;be&nbsp;displayed&nbsp;on&nbsp;it</tt></dd></dl>
 
-<dl><dt><a name="MainMenu-on_draw"><strong>on_draw</strong></a>(self)</dt><dd><tt>Ran&nbsp;when&nbsp;view&nbsp;is&nbsp;rendered&nbsp;to&nbsp;the&nbsp;screen</tt></dd></dl>
+<dl><dt><a name="MainMenu-on_draw"><strong>on_draw</strong></a>(self)</dt><dd><tt>Ran&nbsp;when&nbsp;view&nbsp;is&nbsp;rendered&nbsp;to&nbsp;the&nbsp;screen<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;text&nbsp;and&nbsp;buttons&nbsp;are&nbsp;now&nbsp;on&nbsp;the&nbsp;screen</tt></dd></dl>
 
 <dl><dt><a name="MainMenu-on_mouse_press"><strong>on_mouse_press</strong></a>(self, x, y, button, key_modifiers)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;user&nbsp;clicks&nbsp;the&nbsp;mouse&nbsp;and&nbsp;checks&nbsp;if&nbsp;they&nbsp;clicked&nbsp;a&nbsp;button<br>
 :param:&nbsp;x&nbsp;(int):&nbsp;the&nbsp;x&nbsp;position&nbsp;of&nbsp;the&nbsp;mouse<br>
 :param:&nbsp;y&nbsp;(int):&nbsp;the&nbsp;y&nbsp;position&nbsp;of&nbsp;the&nbsp;mouse<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;Checks&nbsp;to&nbsp;see&nbsp;if&nbsp;a&nbsp;button&nbsp;was&nbsp;pressed&nbsp;by&nbsp;doing&nbsp;check_mouse_press_for_buttons</tt></dd></dl>
 
 <dl><dt><a name="MainMenu-on_mouse_release"><strong>on_mouse_release</strong></a>(self, x, y, button, key_modifiers)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;user&nbsp;releases&nbsp;a&nbsp;mouse&nbsp;click&nbsp;and&nbsp;executes&nbsp;a&nbsp;function&nbsp;if&nbsp;they&nbsp;clicked&nbsp;a&nbsp;button<br>
 :param:&nbsp;x&nbsp;(int):&nbsp;the&nbsp;x&nbsp;position&nbsp;of&nbsp;the&nbsp;mouse<br>
 :param:&nbsp;y&nbsp;(int):&nbsp;the&nbsp;y&nbsp;position&nbsp;of&nbsp;the&nbsp;mouse<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;Checks&nbsp;to&nbsp;see&nbsp;if&nbsp;a&nbsp;button&nbsp;was&nbsp;release&nbsp;by&nbsp;doing&nbsp;check_mouse_release_for_buttons</tt></dd></dl>
 
-<dl><dt><a name="MainMenu-on_show"><strong>on_show</strong></a>(self)</dt><dd><tt>Ran&nbsp;when&nbsp;view&nbsp;is&nbsp;intially&nbsp;rendered</tt></dd></dl>
+<dl><dt><a name="MainMenu-on_show"><strong>on_show</strong></a>(self)</dt><dd><tt>Ran&nbsp;when&nbsp;view&nbsp;is&nbsp;intially&nbsp;rendered<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;<a href="arcade.application.html#View">View</a>&nbsp;has&nbsp;a&nbsp;background&nbsp;color</tt></dd></dl>
 
 <dl><dt><a name="MainMenu-play_game"><strong>play_game</strong></a>(self)</dt><dd><tt>Advances&nbsp;the&nbsp;game&nbsp;state.<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;game&nbsp;state&nbsp;advances&nbsp;to&nbsp;selecting&nbsp;how&nbsp;many&nbsp;ships&nbsp;the&nbsp;users&nbsp;want&nbsp;by&nbsp;changing&nbsp;the&nbsp;view&nbsp;to&nbsp;NumberShips</tt></dd></dl>
 
 <hr>
 Static methods defined here:<br>
 <dl><dt><a name="MainMenu-quit_game"><strong>quit_game</strong></a>()</dt><dd><tt>Closes&nbsp;the&nbsp;game.<br>
-:return:&nbsp;returns&nbsp;none.</tt></dd></dl>
+:return:&nbsp;returns&nbsp;none.<br>
+&nbsp;<br>
+:post:&nbsp;The&nbsp;window&nbsp;closes&nbsp;and&nbsp;the&nbsp;program&nbsp;ends</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="arcade.application.html#View">arcade.application.View</a>:<br>

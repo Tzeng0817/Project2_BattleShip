@@ -84,14 +84,18 @@ is&nbsp;a&nbsp;read-only&nbsp;view&nbsp;of&nbsp;the&nbsp;internal&nbsp;mapping.<
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#Ship">Ship</a>(size,&nbsp;origin,&nbsp;direction)<br>
 &nbsp;<br>
-<a href="#Ship">Ship</a>&nbsp;creates&nbsp;a&nbsp;ship,&nbsp;initialized&nbsp;with&nbsp;a&nbsp;size,&nbsp;direction,&nbsp;and&nbsp;origin<br>&nbsp;</tt></td></tr>
+<a href="#Ship">Ship</a>&nbsp;creates&nbsp;a&nbsp;ship,&nbsp;initialized&nbsp;with&nbsp;a&nbsp;size,&nbsp;direction,&nbsp;and&nbsp;origin<br>
+&nbsp;<br>
+:pre:&nbsp;Assumes&nbsp;the&nbsp;edge&nbsp;cases&nbsp;of&nbsp;negative&nbsp;indices&nbsp;have&nbsp;already&nbsp;been&nbsp;checked<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="Ship-__init__"><strong>__init__</strong></a>(self, size, origin, direction)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#Ship">Ship</a>&nbsp;<a href="builtins.html#object">object</a><br>
 :returns:&nbsp;returns&nbsp;none</tt></dd></dl>
 
 <dl><dt><a name="Ship-get_cells"><strong>get_cells</strong></a>(self)</dt><dd><tt>retrieves&nbsp;the&nbsp;locations&nbsp;of&nbsp;the&nbsp;ship<br>
-:returns:&nbsp;returns&nbsp;list&nbsp;of&nbsp;tuples&nbsp;with&nbsp;the&nbsp;locations&nbsp;of&nbsp;the&nbsp;ships&nbsp;on&nbsp;the&nbsp;grid</tt></dd></dl>
+:returns:&nbsp;returns&nbsp;list&nbsp;of&nbsp;tuples&nbsp;with&nbsp;the&nbsp;locations&nbsp;of&nbsp;the&nbsp;ships&nbsp;on&nbsp;the&nbsp;grid<br>
+&nbsp;<br>
+:post:&nbsp;tells&nbsp;the&nbsp;caller&nbsp;the&nbsp;location&nbsp;of&nbsp;the&nbsp;ship&nbsp;on&nbsp;the&nbsp;grid</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
