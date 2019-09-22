@@ -1,53 +1,61 @@
-"""
-Window with buttons and Text(How many ships)
-"""
 import arcade
-from button import Button
-from button import NumberButton
+import player
+from button import TextButton
 from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
+from gui_shiplocations import ShipLocations
+
+# SCREEN_WIDTH = 800
+# SCREEN_HEIGHT = 600
+
+# Set how many rows and columns we will have
+ROW_COUNT = 8
+COLUMN_COUNT = 8
+
+# This sets the WIDTH and HEIGHT of each grid location
+WIDTH = 80
+HEIGHT = 80
+
+# This sets the margin between each cell
+# and on the edges of the screen.
+MARGIN = 5
+
+#
+OFFSET_AXIS_LABEL = 30
+OFFSET_BUTTON = 100
+
+# Do the math to figure out our screen dimensions
+SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL #1315
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON #1415
 
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 800
-SCREEN_TITLE = "Click on the number of ships"
-
-
-class NumberShips(arcade.Window):
-    """
-    NumberShips class is the window for gui_number_ships
-    """
-    def __init__(self, width, height, title):
+class NumberShips(arcade.View):
+    def __init__(self):
         """
-        Constructs a new NumberShips window.
+        Constructs a new MainMenuGUI object and sets the background color of the window.
         :return: returns none.
         """
-        super().__init__(width, height, title)
-        arcade.set_background_color(arcade.color.AMAZON)
-
-    def setup(self):
-        """
-        Adding button to the button_list
-        """
+        super().__init__()
         self.button_list = []
-        self.button_1 = NumberButton(110, 490, self.number_1, "1")
+        self.button_1 = TextButton(110, 320, self.number_1, "1")
+        self.button_2 = TextButton(250, 320, self.number_2, "2")
+        self.button_3 = TextButton(390, 320, self.number_3, "3")
+        self.button_4 = TextButton(530, 320, self.number_4, "4")
+        self.button_5 = TextButton(670, 320, self.number_5, "5")
+
         self.button_list.append(self.button_1)
-        self.button_2 = NumberButton(250, 490, self.number_2, "2")
         self.button_list.append(self.button_2)
-        self.button_3 = NumberButton(390, 490, self.number_3, "3")
         self.button_list.append(self.button_3)
-        self.button_4 = NumberButton(530, 490, self.number_4, "4")
         self.button_list.append(self.button_4)
-        self.button_5 = NumberButton(670, 490, self.number_5, "5")
         self.button_list.append(self.button_5)
 
-    def on_draw(self):
-        """
-        draw the text and the buttons in the list_button
-        """
-        arcade.start_render()
-        arcade.draw_text("How many Ships do you want?", 80, 530, arcade.color.BLACK, 40)
+    def on_show(self):
+        arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/1.80, SCREEN_HEIGHT/2,
+                         arcade.color.BLACK, font_size=45, anchor_x="center")
         for element in self.button_list:
             element.draw()
 
@@ -67,69 +75,60 @@ class NumberShips(arcade.Window):
         """
         check_mouse_release_for_buttons(x, y, self.button_list)
 
-    def pause_program(self):
-        """
-        pause the program
-        """
-        self.pause = True
-
-    def resume_program(self):
-        """
-        resume the program
-        """
-        self.pause = False
-
-    @staticmethod
-    def number_1():
+    def number_1(self):
         """
         return 1 to the next window
         :return: 1 (int)
         """
-        print("clicked on button 1")
-        return 1
+        num_of_ships = 1
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
-    @staticmethod
-    def number_2():
+    def number_2(self):
         """
         return 2 to the next window
         :return: 2 (int)
         """
-        print("clicked on button 2")
-        return 2
+        num_of_ships = 2
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
-    @staticmethod
-    def number_3():
+    def number_3(self):
         """
         return 3 to the next window
         :return: 3 (int)
         """
-        print("clicked on button 3")
-        return 3
+        num_of_ships = 3
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
-    @staticmethod
-    def number_4():
+    def number_4(self):
         """
         return 4 to the next window
         :return: 4 (int)
         """
-        print("clicked on button 4")
-        return 4
+        num_of_ships = 4
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
-    @staticmethod
-    def number_5():
+    def number_5(self):
         """
         return 5 to the next window
         :return: 5 (int)
         """
-        print("clicked on button 5")
-        return 5
+        num_of_ships = 5
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
 
-def main():
-    window = NumberShips(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    window.setup()
-    arcade.run()
 
-
-if __name__ == "__main__":
-    main()

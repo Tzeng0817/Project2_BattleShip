@@ -1,7 +1,11 @@
+'''
+Contains BoardWindow class and required additional Constants defining the cell sizes
+'''
+
+from functools import reduce
 import arcade
 from board import CellStatus
 from player import Player
-from functools import reduce
 
 
 # This sets the WIDTH and HEIGHT of each grid location
@@ -30,6 +34,7 @@ class BoardWindow(arcade.Window):
         :param: is_own_board (Bool): Is this board owned by the player it refers to
         :return: None
         '''
+
         super().__init__(width, height, title)
         self.shape_list = None
         self.player = player
@@ -47,6 +52,7 @@ class BoardWindow(arcade.Window):
 
         :returns: None
         '''
+
         self.shape_list = arcade.ShapeElementList()
         grid = self.player.board.get_board_view()[0]
         for row in range(8):
@@ -64,7 +70,7 @@ class BoardWindow(arcade.Window):
 
     def on_draw(self):
         """
-        Render to the screen.
+        Renders the class to the screen
         """
 
         arcade.start_render()
@@ -87,11 +93,12 @@ class BoardWindow(arcade.Window):
 
     def on_mouse_press(self, x, y, button, modifiers):
         """
-        Called when the user presses a mouse button.
+        Handles user clicking on a grid cell
         """
+
         if self.is_own_board:
             return
-        
+
         # Change the x/y screen coordinates to grid coordinates
         column = (x - OFFSET) // (CELL_WIDTH + MARGIN)
         row = (y) // (CELL_HEIGHT + MARGIN)
@@ -104,4 +111,3 @@ class BoardWindow(arcade.Window):
             self.player.be_attacked(row, column)
         self.recreate_grid()
         self.on_end()
-
