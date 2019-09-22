@@ -259,7 +259,7 @@ class DummyView(arcade.View):
         """
         arcade.start_render()
         if (DummyView.iterations == 2):
-            arcade.draw_text("Starting Game", 140, 450, arcade.color.WHITE, 54)
+            arcade.draw_text("Starting Game", 200, 450, arcade.color.WHITE, 54)
             arcade.draw_text("Click when Player 1 is ready to play", 180, 400, arcade.color.WHITE, 25)
         else:
             arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
