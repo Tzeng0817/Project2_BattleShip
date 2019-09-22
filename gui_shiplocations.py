@@ -239,26 +239,44 @@ class ShipPlacementView(arcade.View):
 
 
 class DummyView(arcade.View):
+    """
+    tells the players to switch between turns
+    """
+
     iterations = 0
     players = []
     has_ran = False
     def __init__(self):
+        """
+        Constructor - calls parent class and increments iterations
+        """
         super().__init__()
         DummyView.iterations += 1
 
     def on_show(self):
+        """
+        sets background color to black 
+        """
         arcade.set_background_color(arcade.color.ORANGE_PEEL)
 
     def on_draw(self):
+        """
+        draws text on new window
+        """
         arcade.start_render()
         if (DummyView.iterations == 2):
-            arcade.draw_text("Starting Game", 140, 450, arcade.color.WHITE, 54)
+            arcade.draw_text("Starting Game", 200, 450, arcade.color.WHITE, 54)
             arcade.draw_text("Click when Player 1 is ready to play", 180, 400, arcade.color.WHITE, 25)
         else:
             arcade.draw_text("Next Player TURN", 140, 450, arcade.color.WHITE, 54)
             arcade.draw_text("Click when next player is ready", 180, 400, arcade.color.WHITE, 25)
 
     def on_mouse_press(self, x, y, button, modifiers):
+        """
+        Called whenever mouse is pressed. 
+        :param: key (key) - key pressed 
+        :param: modifiers - life cycle method
+        """
         player2 = Player(DummyView.players[0].num_of_ships)
         next_player_ships_placement = ShipPlacementView(player2)
         self.window.show_view(next_player_ships_placement)
