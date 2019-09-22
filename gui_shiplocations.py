@@ -104,6 +104,12 @@ class ShipPlacementView(arcade.View):
             dummy_view = DummyView()
             DummyView.players.append(self.player)
             self.window.show_view(dummy_view)
+        arcade.draw_text("Ship", 750, 725, arcade.color.WHITE, 15, anchor_x="center")
+        arcade.draw_text("Orientation:", 750, 700, arcade.color.WHITE, 15, anchor_x="center")
+        if (self.direction == Direction.RIGHT):
+            arcade.draw_text("Horizontal", 750, 675, arcade.color.WHITE, 15, anchor_x="center")
+        else:
+            arcade.draw_text("Vertical", 750, 675, arcade.color.WHITE, 15, anchor_x="center")
 
     def on_mouse_press(self, x, y, button, modifiers):
         """
