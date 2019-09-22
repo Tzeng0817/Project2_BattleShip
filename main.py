@@ -1,3 +1,6 @@
+"""
+Creates the main game window and starts the program by creating an instance of MainMenu and setting the window view to that instance.
+"""
 import arcade
 import gui_main_menu
 
