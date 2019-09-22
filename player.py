@@ -10,6 +10,8 @@ class Player():
         Constructs a player object
         :param: num_of_ships (int): gives us the player's shape
         :return: returns none
+
+        :pre: The calling class knows how many ships the users want to play with
         """
         self.num_of_ships = num_of_ships
         self.lost = False
@@ -19,8 +21,10 @@ class Player():
     #used by game class to determine if player has lost
     def has_lost(self):
         """
-        Lets board know when player has lost
-        :return: returns bool - loss status   
+        Lets game know when player has lost
+        :return: returns bool - loss status
+        
+        :post: Game now knows whether or not the player has lost
         """
         if self.total_ship_blocks == 0:
             self.lost = True
@@ -36,6 +40,8 @@ class Player():
         :param: x_pos (int): the x position of the mouse click
         :param: y_pos (int): the y position of the mouse click
         :return: bool - true if hit, false if not
+
+        :post: Game now knows whether or not the player has been attacked
         """
         print(self.total_ship_blocks)
         if self.board.attacked(x_pos, y_pos) == True and self.total_ship_blocks > 0:
@@ -52,6 +58,8 @@ class Player():
         Calculates amount of ship blocks available to player
         :param: num_of_ships (int): how many ships the player has
         :return: int - amount of ship blocks player has
+
+        :post: Returns how many unhit ship cells the player has
         """
         sum = 0
         for i in range(1, num_of_ships+1):

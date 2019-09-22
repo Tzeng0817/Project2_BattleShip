@@ -10,6 +10,7 @@ class Direction(Enum):
     """
     Simple enum for the direction a ship can be oriented.
     up (0), right (1), down (2), left (3)
+
     """
     UP = 0
     RIGHT = 1
@@ -21,6 +22,8 @@ class Ship:
 
     """
     Ship creates a ship, initialized with a size, direction, and origin
+
+    :pre: Assumes the edge cases of negative indices have already been checked
     """
     # constructor - creates a ship of size(size), an origin and a given direction
     # assumes that edge cases are checked for (no negative indices)
@@ -40,6 +43,8 @@ class Ship:
         """
         retrieves the locations of the ship
         :returns: returns list of tuples with the locations of the ships on the grid
+
+        :post: tells the caller the location of the ship on the grid
         """
         self.list = [self.origin]
 
