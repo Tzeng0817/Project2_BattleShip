@@ -1,10 +1,10 @@
 """
 Ship class for ship object
 Contains enumerator for direction the ship is oriented from origin
-
 """
 
 from enum import Enum
+
 
 class Direction(Enum):
     """
@@ -41,13 +41,12 @@ class Ship:
         retrieves the locations of the ship
         :returns: returns list of tuples with the locations of the ships on the grid
         """
-        self.list=[self.origin]
+        self.list = [self.origin]
 
         for i in range(1, self.size):
             if(self.direction ==self.direction.RIGHT):
                 self.list.append((self.origin[0], self.origin[1]+i))
             elif(self.direction ==self.direction.DOWN):
                 self.list.append((self.origin[0]-i, self.origin[1]))
-
 
         return self.list

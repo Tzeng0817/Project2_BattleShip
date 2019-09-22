@@ -1,3 +1,6 @@
+'''
+Handles Selection of Ships
+'''
 import arcade
 import player
 from button import TextButton
@@ -30,6 +33,9 @@ SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFF
 
 
 class NumberShips(arcade.View):
+    '''
+    Handles selection for number of ships and passes control off the ShipPlacementView class
+    '''
     def __init__(self):
         """
         Constructs a new MainMenuGUI object and sets the background color of the window.
@@ -50,9 +56,15 @@ class NumberShips(arcade.View):
         self.button_list.append(self.button_5)
 
     def on_show(self):
+        '''
+        Ran when view is intially drawn to screen
+        '''
         arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
     def on_draw(self):
+        '''
+        Ran when view is rendered
+        '''
         arcade.start_render()
         arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/1.80, SCREEN_HEIGHT/2,
                          arcade.color.BLACK, font_size=45, anchor_x="center")

@@ -14,7 +14,13 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
 
 class MainMenu(arcade.View):
+    '''
+    Manages View for Main Menu Screen
+    '''
     def __init__(self):
+        '''
+        Constructs a MainMenu Object
+        '''
         super().__init__()
         self.button_list = []
         play_button = TextButton(SCREEN_WIDTH/2, SCREEN_HEIGHT/3, self.play_game, "Start")
@@ -23,9 +29,15 @@ class MainMenu(arcade.View):
         self.button_list.append(quit_button)
 
     def on_show(self):
+        '''
+        Ran when view is intially rendered
+        '''
         arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
     def on_draw(self):
+        '''
+        Ran when view is rendered to the screen
+        '''
         arcade.start_render()
         arcade.draw_text("Welcome to KRAAG Battleship!", SCREEN_WIDTH/2, SCREEN_HEIGHT/2,
                          arcade.color.BLACK, font_size=50, anchor_x="center")

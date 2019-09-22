@@ -140,15 +140,15 @@ class ShipPlacementView(arcade.View):
                             break
                 #if grid cell is red and ship is selected make current selection ship cells white again and
                 #changed selection back to not selection
-                elif self.grid[row][column] == 1 and self.selected:
-                    for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (column + self.length_of_ship - 1) < COLUMN_COUNT:
-                            self.grid[row][column + i] = 0
-                            self.selected = False
-                        else:
-                            print(f"offscreen redo")
-                            self.selected = False
-                            break
+                # elif self.grid[row][column] == 1 and self.selected:
+                #     for i in range(self.length_of_ship):
+                #         if row < ROW_COUNT and column < COLUMN_COUNT and (column + self.length_of_ship - 1) < COLUMN_COUNT:
+                #             self.grid[row][column + i] = 0
+                #             self.selected = False
+                #         else:
+                #             print(f"offscreen redo")
+                #             self.selected = False
+                #             break
                 #if grid cell selected is white and a ship location has already been selected
                 #then do not select another ship
                 elif self.grid[row][column] == 0 and self.selected:
