@@ -15,7 +15,7 @@ WINDOW_WIDTH = 715
 
 class Game:
     """
-    Game manages the flow of the game and the GUI.
+    Game manages the flow of the game and the GUI and controls BoardWindow.
     """
 
     def __init__(self, player1: Player, player2: Player):

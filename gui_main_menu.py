@@ -15,7 +15,7 @@ SCREEN_HEIGHT = 800
 
 class MainMenu(arcade.View):
     '''
-    Manages View for Main Menu Screen
+    Manages View for Main Menu Screen. Either quits the program or hands control off to NumberShips.
     '''
     def __init__(self):
         '''

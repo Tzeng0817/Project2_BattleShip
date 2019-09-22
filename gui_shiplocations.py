@@ -240,7 +240,7 @@ class ShipPlacementView(arcade.View):
 
 class DummyView(arcade.View):
     """
-    tells the players to switch between turns
+    Tells the players to switch between turns and hands off control to Game
     """
 
     iterations = 0
