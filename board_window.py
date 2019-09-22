@@ -1,5 +1,6 @@
 '''
-Contains BoardWindow class and required additional Constants defining the cell sizes
+Contains BoardWindow class and required additional Constants defining the cell sizes.
+Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
 '''
 
 from functools import reduce

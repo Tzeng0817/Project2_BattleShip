@@ -1,5 +1,5 @@
 # Battleship
-Made with ❤️ by KRAAG
+"The Goal Is Not To Cry"
 
 *Requires Python 3.7+*
 
