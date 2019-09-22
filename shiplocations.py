@@ -4,28 +4,22 @@ Need a player passed to me with number of player
 import arcade
 from board import Board
 from ship import Ship, Direction
-
 # Set how many rows and columns we will have
 ROW_COUNT = 8
 COLUMN_COUNT = 8
-
 # This sets the WIDTH and HEIGHT of each grid location
 WIDTH = 80
 HEIGHT = 80
-
 # This sets the margin between each cell
 # and on the edges of the screen.
 MARGIN = 5
-
 # handles offset of screen to allow for space for text and axis
 OFFSET_AXIS_LABEL = 30
 OFFSET_BUTTON = 100
-
 # Do the math to figure out our screen dimensions
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON
 SCREEN_TITLE = "BATTLESHIP"
-
 
 class SHIP_LOCATION_SETUP(arcade.Window):
     """
@@ -59,6 +53,9 @@ class SHIP_LOCATION_SETUP(arcade.Window):
         self.recreate_grid()
 
     def recreate_grid(self):
+        """
+        Redraws grid after event.
+        """
         self.shape_list = arcade.ShapeElementList()
         #draws each grid box and assigns color based on 2Darray value
         for row in range(ROW_COUNT):
