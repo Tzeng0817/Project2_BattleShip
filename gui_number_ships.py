@@ -1,4 +1,5 @@
 import arcade
+import player
 from button import TextButton
 from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
@@ -49,13 +50,12 @@ class NumberShips(arcade.View):
         self.button_list.append(self.button_5)
 
     def on_show(self):
-        arcade.set_background_color(arcade.color.ORANGE_PEEL)
+        arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
 
     def on_draw(self):
         arcade.start_render()
         arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/1.80, SCREEN_HEIGHT/2,
                          arcade.color.BLACK, font_size=45, anchor_x="center")
-
         for element in self.button_list:
             element.draw()
 
@@ -80,50 +80,55 @@ class NumberShips(arcade.View):
         return 1 to the next window
         :return: 1 (int)
         """
-        print("clicked on button 1")
-        dummy_view = ShipLocations()
-        self.window.show_view(dummy_view)
-        return 1
+        num_of_ships = 1
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
     def number_2(self):
         """
         return 2 to the next window
         :return: 2 (int)
         """
-        print("clicked on button 2")
-        dummy_view = ShipLocations()
-        self.window.show_view(dummy_view)
-        return 2
+        num_of_ships = 2
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
     def number_3(self):
         """
         return 3 to the next window
         :return: 3 (int)
         """
-        print("clicked on button 3")
-        dummy_view = ShipLocations()
-        self.window.show_view(dummy_view)
-        return 3
+        num_of_ships = 3
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
     def number_4(self):
         """
         return 4 to the next window
         :return: 4 (int)
         """
-        print("clicked on button 4")
-        dummy_view = ShipLocations()
-        self.window.show_view(dummy_view)
-        return 4
+        num_of_ships = 4
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
     def number_5(self):
         """
         return 5 to the next window
         :return: 5 (int)
         """
-        print("clicked on button 5")
-        dummy_view = ShipLocations()
-        self.window.show_view(dummy_view)
-        return 5
+        num_of_ships = 5
+        player1 = player.Player(num_of_ships)
+        player2 = player.Player(num_of_ships)
+        place_ships_view = ShipLocations()
+        self.window.show_view(place_ships_view)
 
 
 
