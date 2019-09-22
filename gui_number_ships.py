@@ -1,33 +1,31 @@
 import arcade
-from button import NumberButton
+from button import TextButton
 from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
+from gui_shiplocations import ShipLocations
 
-WIDTH = 800
-HEIGHT = 600
+# SCREEN_WIDTH = 800
+# SCREEN_HEIGHT = 600
 
+# Set how many rows and columns we will have
+ROW_COUNT = 8
+COLUMN_COUNT = 8
 
-class MainMenu(arcade.View):
-    def __init__(self):
-        """
-        Constructs a new MainMenuGUI object and sets the background color of the window.
-        :return: returns none.
-        """
-        super().__init__()
+# This sets the WIDTH and HEIGHT of each grid location
+WIDTH = 80
+HEIGHT = 80
 
-    def on_show(self):
-        arcade.set_background_color(arcade.color.AIR_FORCE_BLUE)
+# This sets the margin between each cell
+# and on the edges of the screen.
+MARGIN = 5
 
-    def on_draw(self):
-        arcade.start_render()
-        arcade.draw_text("Welcome to KRAAG Battleship", WIDTH/2, HEIGHT/2,
-                         arcade.color.BLACK, font_size=48, anchor_x="center")
-        arcade.draw_text("Click to play", WIDTH/2, HEIGHT/2-75,
-                         arcade.color.WHITE, font_size=20, anchor_x="center")
+#
+OFFSET_AXIS_LABEL = 30
+OFFSET_BUTTON = 100
 
-    def on_mouse_press(self, x, y, button, modifiers):
-        number_ships = NumberShips()
-        self.window.show_view(number_ships)
+# Do the math to figure out our screen dimensions
+SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN + OFFSET_AXIS_LABEL #1315
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFFSET_BUTTON #1415
 
 
 class NumberShips(arcade.View):
@@ -38,11 +36,11 @@ class NumberShips(arcade.View):
         """
         super().__init__()
         self.button_list = []
-        self.button_1 = NumberButton(110, 260, self.number_1, "1")
-        self.button_2 = NumberButton(250, 260, self.number_2, "2")
-        self.button_3 = NumberButton(390, 260, self.number_3, "3")
-        self.button_4 = NumberButton(530, 260, self.number_4, "4")
-        self.button_5 = NumberButton(670, 260, self.number_5, "5")
+        self.button_1 = TextButton(110, 260, self.number_1, "1")
+        self.button_2 = TextButton(250, 260, self.number_2, "2")
+        self.button_3 = TextButton(390, 260, self.number_3, "3")
+        self.button_4 = TextButton(530, 260, self.number_4, "4")
+        self.button_5 = TextButton(670, 260, self.number_5, "5")
 
         self.button_list.append(self.button_1)
         self.button_list.append(self.button_2)
@@ -55,13 +53,9 @@ class NumberShips(arcade.View):
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_text("How many Ships do you want?", WIDTH/2, HEIGHT/2,
-                         arcade.color.BLACK, font_size=50, anchor_x="center")
-        # self.button_1.draw()
-        # self.button_2.draw()
-        # self.button_3.draw()
-        # self.button_4.draw()
-        # self.button_5.draw()
+        arcade.draw_text("How many Ships do you want?", SCREEN_WIDTH/2, SCREEN_HEIGHT/2,
+                         arcade.color.BLACK, font_size=45, anchor_x="center")
+
         for element in self.button_list:
             element.draw()
 
@@ -87,7 +81,7 @@ class NumberShips(arcade.View):
         :return: 1 (int)
         """
         print("clicked on button 1")
-        dummy_view = DummyView()
+        dummy_view = ShipLocations()
         self.window.show_view(dummy_view)
         return 1
 
@@ -97,7 +91,7 @@ class NumberShips(arcade.View):
         :return: 2 (int)
         """
         print("clicked on button 2")
-        dummy_view = DummyView()
+        dummy_view = ShipLocations()
         self.window.show_view(dummy_view)
         return 2
 
@@ -107,7 +101,7 @@ class NumberShips(arcade.View):
         :return: 3 (int)
         """
         print("clicked on button 3")
-        dummy_view = DummyView()
+        dummy_view = ShipLocations()
         self.window.show_view(dummy_view)
         return 3
 
@@ -117,7 +111,7 @@ class NumberShips(arcade.View):
         :return: 4 (int)
         """
         print("clicked on button 4")
-        dummy_view = DummyView()
+        dummy_view = ShipLocations()
         self.window.show_view(dummy_view)
         return 4
 
@@ -127,28 +121,9 @@ class NumberShips(arcade.View):
         :return: 5 (int)
         """
         print("clicked on button 5")
-        dummy_view = DummyView()
+        dummy_view = ShipLocations()
         self.window.show_view(dummy_view)
         return 5
 
 
-class DummyView(arcade.View):
-    def on_show(self):
-        arcade.set_background_color(arcade.color.WHITE)
 
-    def on_draw(self):
-        arcade.start_render()
-        arcade.draw_text("Dummy Screen", WIDTH/2, HEIGHT/2,
-                         arcade.color.BLACK, font_size=50, anchor_x="center")
-
-
-def main():
-    window = arcade.Window(WIDTH, HEIGHT, "KRAAG BATTLESHIP")
-    window.total_score = 0
-    main_menu = MainMenu()
-    window.show_view(main_menu)
-    arcade.run()
-
-
-if __name__ == "__main__":
-    main()

@@ -28,18 +28,17 @@ SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN + OFFSET_AXIS_LABEL + OFF
 SCREEN_TITLE = "BATTLESHIP"
 
 
-class Ship_Locations(arcade.Window):
+class ShipLocations(arcade.View):
     """
     Main application class.
     """
-
-    def __init__(self, width, height, title):
+    def __init__(self):
         """
         Set up the application.
         """
-        super().__init__(width, height, title)
+        super().__init__()
 
-        self.board = Board()
+        # self.board = Board()
 
         self.shape_list = None
         self.length_of_ship = 5
@@ -57,8 +56,10 @@ class Ship_Locations(arcade.Window):
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)  # Append a cell
 
-        arcade.set_background_color(arcade.color.BLACK)
         self.recreate_grid()
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
 
     def recreate_grid(self):
         self.shape_list = arcade.ShapeElementList()
@@ -146,18 +147,18 @@ class Ship_Locations(arcade.Window):
                 print(self.board.get_board_view()[1])
         if key == arcade.key.SPACE:
             print(f"space")
-            if(self.direction == Direction.RIGHT):
+            if self.direction == Direction.RIGHT:
                 self.direction = Direction.DOWN
                 print(self.direction)
-            elif(self.direction == Direction.DOWN):
+            elif self.direction == Direction.DOWN:
                 self.direction = Direction.RIGHT
                 print(self.direction)
 
 
-
-def main():
-    Ship_Locations(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    arcade.run()
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     ShipLocations(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+#     arcade.run()
+#
+#
+# if __name__ == "__main__":
+#     main()

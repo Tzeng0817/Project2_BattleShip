@@ -1,8 +1,11 @@
+"""
+buttons module contains the TextButton class for creating buttons with text in them. It also contains
+the funtions check_mouse_press_for_buttons and check_mouse_release_for_buttons which check if a button was pressed.
+It also contains several classes of specific buttons used throughout the program.
+The code for the TextButton class and the functions check_mouse_press_for_buttons and check_mouse_release_for_buttons
+was taken from an example in the Arcade documentation: http://arcade.academy/examples/gui_text_button.html
+"""
 import arcade
-"""
-Button module containing the button class and
-implements a text based and number based button
-"""
 
 
 class Button:
@@ -38,7 +41,8 @@ class Button:
     def draw(self):
         """
         initiates the button as a rectable with position and 
-        tracks whether or not the given button is pressed and displays corresponding color 
+        tracks whether or not the given button is pressed and displays corresponding color
+        :return: returns none.
         """
         arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width,
                                      self.height, self.face_color)
@@ -119,12 +123,19 @@ def check_mouse_release_for_buttons(x, y, button_list):
             button.on_release()
 
 
-class NumberButton(Button):
+class TextButton(Button):
     """
-    Button class that deals with number based buttons
+    Button class that deals with Text based buttons
     """
-    def __init__(self, center_x, center_y, action_function, number):
-        super().__init__(center_x, center_y, 100, 40, number, 18, "Arial")
+    def __init__(self, center_x, center_y, action_function, text):
+        """
+        Constructs a new NumberButton.
+        :param: center_x (int): x position of where the center of the button is so the textbutton class can draw it.
+        :param: center_y (int): y position of where the center of the button is so the textbutton class can draw it.
+        :param: action_function: The function that is executed when the button is pressed.
+        :return: returns none.
+        """
+        super().__init__(center_x, center_y, 100, 40, text, 18, "Arial")
         self.action_function = action_function
 
     def on_release(self):
@@ -133,7 +144,6 @@ class NumberButton(Button):
         """
         super().on_release()
         self.action_function()
-
 
 
 
