@@ -7,6 +7,7 @@ implements a text based and number based button
 class Button:
     """
     Button class to make the creation of buttons easier - text based button
+    
     """
     def __init__(self,
                  center_x, center_y,
@@ -20,6 +21,16 @@ class Button:
                  button_height=2):
         """
         Constructs a button with position, text, font size, color, button width and height
+        :param: center_x (int) - center location of x coordinate
+        :param: center_y (int) - center location of y coordinate
+        :param: width (int) - width of button
+        :param: length (int) - length of button
+        :param: text - text that goes on buton
+        :param: font_face - font of text
+        :param: face_color - sets button color to light gray
+        :param: highlight_color - sets highglight color to white
+        :param: shadow_color - sets shadow color to gray
+        :param: button_height (int) - sets height to gray
         """
         self.center_x = center_x
         self.center_y = center_y
@@ -97,7 +108,12 @@ class Button:
 
 
 def check_mouse_press_for_buttons(x, y, button_list):
-    """ Given an x, y, see if we need to register any button clicks. """
+    """
+    Given an x, y, see if we need to register any button clicks. 
+    :param: x (int) - x position of mousepress
+    :param: y (int) - y position of mousepress
+    :param: button_list - contains list of buttons to search through
+    """
     for button in button_list:
         if x > button.center_x + button.width / 2:
             continue
@@ -111,8 +127,13 @@ def check_mouse_press_for_buttons(x, y, button_list):
 
 
 def check_mouse_release_for_buttons(x, y, button_list):
-    """ If a mouse button has been released, see if we need to process
-        any release events. """
+    """ 
+    If a mouse button has been released, see if we need to process
+    any release events. 
+    :param: x (int) - x position of mousepress
+    :param: y (int) - y position of mousepress
+    :param: button_list - contains list of buttons to search through
+    """
     for button in button_list:
         if button.pressed:
             button.on_release()
