@@ -34,6 +34,8 @@ class Button:
         :param: highlight_color - sets highlight color to white
         :param: shadow_color - sets shadow color to gray
         :param: button_height (int) - sets height to gray
+
+        :pre: A window or view exists for the button to be created on
         """
         self.center_x = center_x
         self.center_y = center_y
@@ -53,6 +55,8 @@ class Button:
         initiates the button as a rectable with position and
         tracks whether or not the given button is pressed and displays corresponding color
         :return: returns none.
+
+        :post: The button is drawn on the window
         """
         arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width,
                                      self.height, self.face_color)
@@ -101,12 +105,16 @@ class Button:
     def on_press(self):
         """
         bool controlling whether the button is pressed or not
+
+        :post: self.pressed is true, allowing draw to know that it needs to do the clicked animation
         """
         self.pressed = True
 
     def on_release(self):
         """
         bool checking whether button is released
+
+        :post: self.pressed is False, allowing draw to know that it needs to do the release animation
         """
         self.pressed = False
 
@@ -117,6 +125,8 @@ def check_mouse_press_for_buttons(x, y, button_list):
     :param: x (int) - x position of mousepress
     :param: y (int) - y position of mousepress
     :param: button_list - contains list of buttons to search through
+
+    :post: the button now knows whether it was pressed or not
     """
     for button in button_list:
         if x > button.center_x + button.width / 2:
@@ -137,6 +147,8 @@ def check_mouse_release_for_buttons(x, y, button_list):
     :param: x (int) - x position of mousepress
     :param: y (int) - y position of mousepress
     :param: button_list - contains list of buttons to search through
+
+    :post: Any relevent functions associated with the pressed button are executed
     """
     for button in button_list:
         if button.pressed:
@@ -154,6 +166,8 @@ class TextButton(Button):
         :param: center_y (int): y position of where the center of the button is so the textbutton class can draw it.
         :param: action_function: The function that is executed when the button is pressed.
         :return: returns none.
+
+        :pre: A window or view exists for the button to be created on
         """
         super().__init__(center_x, center_y, 65, 40, text, 18, "Arial")
         self.action_function = action_function
@@ -161,6 +175,9 @@ class TextButton(Button):
     def on_release(self):
         """
         implements methods necessary when button is released
+        :return: none
+
+        :post: The action_function is executed
         """
         super().on_release()
         self.action_function()

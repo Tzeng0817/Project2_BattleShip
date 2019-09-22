@@ -25,7 +25,7 @@ class Game:
         :param: player2 (Player) - player 2 in the game
         :return: returns none.
 
-        :pre: Both Player s have been initalized already with ships placed
+        :pre: Both Players have been initalized already with ships placed
         """
 
         print("Making game")
