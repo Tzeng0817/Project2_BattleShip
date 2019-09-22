@@ -38,7 +38,7 @@ class ShipLocations(arcade.View):
         """
         super().__init__()
 
-        # self.board = Board()
+        self.board = Board()
 
         self.shape_list = None
         self.length_of_ship = 5
@@ -113,7 +113,7 @@ class ShipLocations(arcade.View):
 
             i = 0
             # Flip the location between 1 and 0.
-            if(self.direction == Direction.RIGHT):
+            if self.direction == Direction.RIGHT:
                 if self.grid[row][column] == 0:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT:
@@ -124,7 +124,7 @@ class ShipLocations(arcade.View):
                             self.grid[row][column + i] = 0
                         if row < ROW_COUNT and column < COLUMN_COUNT:
                             self.grid[row][column - i] = 0
-            elif(self.direction == Direction.DOWN):
+            elif self.direction == Direction.DOWN:
                 if self.grid[row][column] == 0:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT:
@@ -156,8 +156,8 @@ class ShipLocations(arcade.View):
 
 
 # def main():
-#     ShipLocations(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-#     arcade.run()
+#   ShipLocations(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+#   arcade.run()
 #
 #
 # if __name__ == "__main__":
