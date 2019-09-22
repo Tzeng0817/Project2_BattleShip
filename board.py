@@ -28,16 +28,15 @@ class Board:
         :return: returns none.
         """
         self.hits = [[CellStatus.EMPTY] * 8 for _ in range(0, 8)]
-        self.place_ships()
+        self.ships = []
 
-    def place_ships(self):
+    def place_ships(self, length, origin, direction):
         """
         Handles board setup for placing ships
         :return: returns none.
         @TODO: Implement this once UI is complete
         """
-        #self.ships.append(Ship(length, origin, direction)); EDITED OUT BY ALFONSO BECAUSE IT WAS CAUSING ERRORS IN PLAYER CREATION
-        pass
+        self.ships.append(Ship(length, origin, direction))
 
     def attacked(self, x_pos: int, y_pos: int) -> bool:
         """
