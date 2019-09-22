@@ -29,6 +29,9 @@ class SHIP_LOCATION_SETUP(arcade.view):
     def __init__(self, width, height, title):
         """
         Application constructor.
+        :param: width(int) - width of window
+        :param: height(int) - height of window
+        :param: title (string) - title of window
         """
         super().__init__(width, height, title)
         #initialized global variables
@@ -51,6 +54,9 @@ class SHIP_LOCATION_SETUP(arcade.view):
         self.recreate_grid()
 
     def on_show(self):
+        """
+        Sets background color to black
+        """
         #set background color to black
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -91,6 +97,10 @@ class SHIP_LOCATION_SETUP(arcade.view):
     def on_mouse_press(self, x, y, button, modifiers):
         """
         Called when the user presses a mouse button.
+        :param: x (int) - x location of mouse press
+        :param: y (int) - y location of mouse press
+        :param: button (button) - button of mouse press
+        :param: modifiers - life cycle method
         """
         # Change the x/y screen coordinates to grid coordinates
         self.column = (x - OFFSET_AXIS_LABEL) // (WIDTH + MARGIN)
@@ -169,7 +179,11 @@ class SHIP_LOCATION_SETUP(arcade.view):
         self.recreate_grid()
 
     def on_key_press(self, key, modifiers):
-        """Called whenever a key is pressed. """
+        """
+        Called whenever a key is pressed. 
+        :param: key (key) - key pressed 
+        :param: modifiers - life cycle method
+        """
         #sets the location of first ship in board class when enter key is pressed and then remaining
         #ships as they are looped through
         if key == arcade.key.ENTER:
