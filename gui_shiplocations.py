@@ -1,6 +1,8 @@
 """""
-Handles placing ships in its own View
+Handles placing ships in its own View.
+Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
 """""
+
 import arcade
 from board import Board
 from ship import Ship, Direction

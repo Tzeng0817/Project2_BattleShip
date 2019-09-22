@@ -1,5 +1,6 @@
 '''
-Contains BoardWindow class and required additional Constants defining the cell sizes
+Contains BoardWindow class and required additional Constants defining the cell sizes.
+Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
 '''
 
 from functools import reduce
@@ -91,9 +92,13 @@ class BoardWindow(arcade.Window):
                         arcade.draw_text("X", x + (OFFSET / 2), y - (OFFSET / 2), arcade.color.BLACK, 32)
 
 
-    def on_mouse_press(self, x, y, button, modifiers):
+    def on_mouse_press(self, x, y, _, __):
         """
-        Handles user clicking on a grid cell
+        Handles user shooting at a grid cell including playing sonuds
+
+        :param: x (int): x location of the click
+        :param: y (int): y location of the click
+        :returns: None
         """
 
         if self.is_own_board:
@@ -105,9 +110,10 @@ class BoardWindow(arcade.Window):
 
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
 
-        # Make sure we are on-grid. It is possible to click in the upper right
-        # corner in the margin and go to a grid location that doesn't exist
         if row < 8 and column < 8:
-            self.player.be_attacked(row, column)
+            if self.player.be_attacked(row, column):
+                arcade.play_sound(arcade.load_sound('./sounds/hit.m4a'))
+            else:
+                arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
         self.recreate_grid()
         self.on_end()

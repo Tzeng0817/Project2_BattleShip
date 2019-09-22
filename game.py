@@ -75,7 +75,6 @@ class Game:
 
         :return: None
         '''
-
         if self.current_player == self.player1:
             self.player1_own_board.set_visible(False)
             self.player1_other_board.set_visible(False)
@@ -86,7 +85,6 @@ class Game:
             self.current_player = self.player1
 
         arcade.pause(3)
-
         self.turn_over = True
 
     def run(self, _):
