@@ -34,6 +34,7 @@ class Game:
         self.player2 = player2
         self.turn_over = True
         self.game_over = False
+        self.is_game_over = False
 
         self.own_board = arcade.Window(715, 715, "Your Board")
         self.other_board = arcade.Window(715, 715, "Their Board")
@@ -107,5 +108,7 @@ class Game:
                 self.own_board.show_view(self.player2_own_board)
                 self.other_board.show_view(self.player2_other_board)
             self.turn_over = False
-        elif self.player1.has_lost() or self.player2.has_lost():
+        elif (self.player1.has_lost() or self.player2.has_lost())and not self.is_game_over:
+            self.is_game_over= True
             self.end_game()
+            
