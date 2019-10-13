@@ -407,7 +407,9 @@ class AI_place(arcade.View):
             """
         # Change the x/y screen coordinates to grid coordinates
         row = random.randint(1, 8)
+        self.row = row
         column = random.randint(1, 8)
+        self.column = column
         print(f"Grid coordinates: ({row}, {column})")
         # Make sure initial mouse press is on grid
         if row < ROW_COUNT and column < COLUMN_COUNT:
@@ -514,5 +516,3 @@ class AI_place(arcade.View):
         # is space bar is pushed while ship is selected, then orientation is not
         elif key == arcade.key.SPACE and self.selected:
             print(f"cannot change direction while ship is selected")
-
-
