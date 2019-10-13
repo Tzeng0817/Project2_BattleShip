@@ -27,11 +27,15 @@ class MainMenu(arcade.View):
         '''
         super().__init__()
         self.button_list = []
-        play_button = TextButton(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3 + 30, self.play_game, "Start")
-        ai_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3 - 30), self.ai_mode, "Play With AI")
-        quit_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3) - 90, self.quit_game, "Quit")
-        self.button_list.append(ai_button)
+        play_button = TextButton(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3 + 100, self.play_game, "Start")
+        easy_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3 + 50), self.easy_mode, "Easy AI Mode")
+        mid_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3 ), self.mid_mode, " Medium AI Mode")
+        hard_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3 - 50), self.hard_mode, "Hard AI Mode")
+        quit_button = TextButton(SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 3) - 100, self.quit_game, "Quit")
         self.button_list.append(play_button)
+        self.button_list.append(easy_button)
+        self.button_list.append(mid_button)
+        self.button_list.append(hard_button)
         self.button_list.append(quit_button)
 
     def on_show(self):
@@ -97,7 +101,21 @@ class MainMenu(arcade.View):
         arcade.close_window()
         sys.exit()  # forcibly exits the python program so no futher windows open
 
-    def ai_mode(self):
+    def easy_mode(self):
+        # AI mode
+        # return: none
+        # post: The game state advances to selecting how many ships the users want by changing the view to NumberShips
+        ship_num_view = NumberShips()
+        self.window.show_view(ship_num_view)
+
+    def mid_mode(self):
+        # AI mode
+        # return: none
+        # post: The game state advances to selecting how many ships the users want by changing the view to NumberShips
+        ship_num_view = NumberShips()
+        self.window.show_view(ship_num_view)
+
+    def hard_mode(self):
         # AI mode
         # return: none
         # post: The game state advances to selecting how many ships the users want by changing the view to NumberShips
