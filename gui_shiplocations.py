@@ -335,7 +335,7 @@ class AI_place(arcade.View):
             self.grid.append([])
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)  # Append a cell
-        for i in range(self.length_of_ship):
+        for i in range(50):
             self.place()
             self.recreate_grid()
             self.next()

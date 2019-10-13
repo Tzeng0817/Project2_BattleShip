@@ -9,6 +9,7 @@ from button import check_mouse_press_for_buttons
 from button import check_mouse_release_for_buttons
 import sys
 from gui_number_ships import NumberShips
+from gui_number_ships_a import aNumberShips
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -87,7 +88,7 @@ class MainMenu(arcade.View):
 
         :post: The game state advances to selecting how many ships the users want by changing the view to NumberShips
         """
-        ship_num_view = NumberShips()
+        ship_num_view = aNumberShips()
         self.window.show_view(ship_num_view)
 
     @staticmethod
