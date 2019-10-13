@@ -335,7 +335,10 @@ class AI_place(arcade.View):
             self.grid.append([])
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)  # Append a cell
-        self.recreate_grid()
+        for i in range(self.length_of_ship):
+            self.place()
+            self.recreate_grid()
+            self.next()
 
     def on_show(self):
         """
@@ -395,7 +398,7 @@ class AI_place(arcade.View):
         else:
             arcade.draw_text("Vertical", 750, 675, arcade.color.WHITE, 15, anchor_x="center")
 
-    def on_mouse_press(self, x, y, button, modifiers):
+    def place(self):
         """
             Called when the user presses a mouse button.
             :param: x (int) - x location of mouse press
@@ -473,9 +476,8 @@ class AI_place(arcade.View):
                 elif self.grid[row][column] == 1 and not self.selected:
                     print(f"there is already a ship in this space")
         # redraw grid
-        self.recreate_grid()
 
-    def on_key_press(self, key, modifiers):
+    def next(self):
         """
              Called whenever a key is pressed.
              :param: key (key) - key pressed
@@ -485,34 +487,22 @@ class AI_place(arcade.View):
              """
         # sets the location of first ship in board class when enter key is pressed and then remaining
         # ships as they are looped through
-        if key == arcade.key.ENTER:
-            if self.selected:
-                self.selected = False
-                print(self.row, self.column)
-                self.player.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
-                # loops through the remaining ships in decreasing length
-                if self.length_of_ship > 0:
-                    self.length_of_ship = self.length_of_ship - 1
-                    self.row = 0
-                    self.column = 0
-                    print(f"SSSS")
-                    print(self.player.board.get_board_view()[1])
+        if self.selected:
+            self.selected = False
+            print(self.row, self.column)
+            self.player.board.place_ships(self.length_of_ship, (self.row, self.column), self.direction)
+            # loops through the remaining ships in decreasing length
+            if self.length_of_ship > 0:
+                self.length_of_ship = self.length_of_ship - 1
+                self.row = 0
+                self.column = 0
+                print(self.player.board.get_board_view()[1])
 
+        else:
+            if self.length_of_ship == 0:
+                print(f"All ships placed")
             else:
-                if self.length_of_ship == 0:
-                    print(f"All ships placed")
-                else:
-                    print(f"please place ship")
+                print(f"please place ship")
         # allows the orientation of the ship placement to change between horizontal and vertical
         # when space bar is pushed and a ship is not currently selected
-        if key == arcade.key.SPACE and not self.selected:
-            print(f"space")
-            if self.direction == Direction.RIGHT:
-                self.direction = Direction.DOWN
-                print(self.direction)
-            elif self.direction == Direction.DOWN:
-                self.direction = Direction.RIGHT
-                print(self.direction)
-        # is space bar is pushed while ship is selected, then orientation is not
-        elif key == arcade.key.SPACE and self.selected:
-            print(f"cannot change direction while ship is selected")
+
