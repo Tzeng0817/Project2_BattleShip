@@ -337,7 +337,6 @@ class AI_place(arcade.View):
                 self.grid[row].append(0)  # Append a cell
         for i in range(self.length_of_ship):
             self.place()
-            self.recreate_grid()
             self.next()
 
     def on_show(self):
@@ -415,67 +414,70 @@ class AI_place(arcade.View):
         self.column = column
         print(f"Grid coordinates: ({row}, {column})")
         # Make sure initial mouse press is on grid
-        if row < ROW_COUNT and column < COLUMN_COUNT:
-            i = 0
-            # allows selection of location of ship to be horizontal
-            if self.direction == Direction.RIGHT:
-                # if grid cell is white with no ship currently placed, change grid cells to selected based on
-                # ship length, origin, and direction and then change setting to ship is successfully selected
-                if self.grid[row][column] == 0 and not self.selected:
-                    for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT:
-                            self.grid[row][column + i] = 1
-                            self.selected = True
-                        else:
-                            print(f"invalid placement")
-                            self.selected = False
-                            break
-                # if grid cell is red and ship is selected make current selection ship cells white again and changed
-                # selection back to not selection elif self.grid[row][column] == 1 and self.selected: for i in range(
-                # self.length_of_ship): if row < ROW_COUNT and column < COLUMN_COUNT and (column +
-                # self.length_of_ship - 1) < COLUMN_COUNT: self.grid[row][column + i] = 0 self.selected = False else:
-                # print(f"offscreen redo") self.selected = False break if grid cell selected is white and a ship
-                # location has already been selected then do not select another ship
-                elif self.grid[row][column] == 0 and self.selected:
-                    print(f"ship already selected")
-                # if grid cell selected is red and a ship location has not been selected then a
-                # ship already occupies that location and another grid cell must be selected
-                elif self.grid[row][column] == 1 and not self.selected:
-                    print(f"there is already a ship in this space")
-            # allows selection of location of ship to be vertical
-            elif self.direction == Direction.DOWN:
-                # if grid cell is white with no ship currently placed, change grid cells to selected based on
-                # ship length, origin, and direction and then change setting to ship is successfully selected
-                if self.grid[row][column] == 0 and not self.selected:
-                    for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1:
-                            self.grid[row - i][column] = 1
-                            self.selected = True
-                        else:
-                            print(f"invalid placement")
-                            self.selected = False
-                            break
-                # if grid cell is red and ship is selected make current selection ship cells white again and
-                # changed selection back to not selection
-                elif self.grid[row][column] == 1 and self.selected:
-                    for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1:
-                            self.grid[row - i][column] = 0
-                            self.selected = False
-                        else:
-                            print(f"invalid placement")
-                            self.selected = False
-                            break
-                # if grid cell selected is white and a ship location has already been selected
-                # then do not select another ship
-                elif self.grid[row][column] == 0 and self.selected:
-                    print(f"ship already selected")
-                # if grid cell selected is red and a ship location has not been selected then a
-                # ship already occupies that location and another grid cell must be selected
-                elif self.grid[row][column] == 1 and not self.selected:
-                    print(f"there is already a ship in this space")
-        # redraw grid
+        if self.selected != True:
+            if row < ROW_COUNT and column < COLUMN_COUNT:
+                i = 0
+                # allows selection of location of ship to be horizontal
+                if self.direction == Direction.RIGHT:
+                    # if grid cell is white with no ship currently placed, change grid cells to selected based on
+                    # ship length, origin, and direction and then change setting to ship is successfully selected
+                    if self.grid[row][column] == 0 and not self.selected:
+                        for i in range(self.length_of_ship):
+                            if row < ROW_COUNT and column < COLUMN_COUNT and (
+                                    column + self.length_of_ship - 1) < COLUMN_COUNT:
+                                self.grid[row][column + i] = 1
+                                self.selected = True
+                            else:
+                                print(f"invalid placement")
+                                self.selected = False
+                                break
+                    # if grid cell is red and ship is selected make current selection ship cells white again and changed
+                    # selection back to not selection elif self.grid[row][column] == 1 and self.selected: for i in range(
+                    # self.length_of_ship): if row < ROW_COUNT and column < COLUMN_COUNT and (column +
+                    # self.length_of_ship - 1) < COLUMN_COUNT: self.grid[row][column + i] = 0 self.selected = False else:
+                    # print(f"offscreen redo") self.selected = False break if grid cell selected is white and a ship
+                    # location has already been selected then do not select another ship
+                    elif self.grid[row][column] == 0 and self.selected:
+                        print(f"ship already selected")
+                    # if grid cell selected is red and a ship location has not been selected then a
+                    # ship already occupies that location and another grid cell must be selected
+                    elif self.grid[row][column] == 1 and not self.selected:
+                        print(f"there is already a ship in this space")
+                # allows selection of location of ship to be vertical
+                elif self.direction == Direction.DOWN:
+                    # if grid cell is white with no ship currently placed, change grid cells to selected based on
+                    # ship length, origin, and direction and then change setting to ship is successfully selected
+                    if self.grid[row][column] == 0 and not self.selected:
+                        for i in range(self.length_of_ship):
+                            if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1:
+                                self.grid[row - i][column] = 1
+                                self.selected = True
+                            else:
+                                print(f"invalid placement")
+                                self.selected = False
+                                break
+                    # if grid cell is red and ship is selected make current selection ship cells white again and
+                    # changed selection back to not selection
+                    elif self.grid[row][column] == 1 and self.selected:
+                        for i in range(self.length_of_ship):
+                            if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1:
+                                self.grid[row - i][column] = 0
+                                self.selected = False
+                            else:
+                                print(f"invalid placement")
+                                self.selected = False
+                                break
+                    # if grid cell selected is white and a ship location has already been selected
+                    # then do not select another ship
+                    elif self.grid[row][column] == 0 and self.selected:
+                        print(f"ship already selected")
+                    # if grid cell selected is red and a ship location has not been selected then a
+                    # ship already occupies that location and another grid cell must be selected
+                    elif self.grid[row][column] == 1 and not self.selected:
+                        print(f"there is already a ship in this space")
+            # redraw grid
+        else:
+            self.recreate_grid()
 
     def next(self):
         """
@@ -505,4 +507,3 @@ class AI_place(arcade.View):
                 print(f"please place ship")
         # allows the orientation of the ship placement to change between horizontal and vertical
         # when space bar is pushed and a ship is not currently selected
-
