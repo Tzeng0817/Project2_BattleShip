@@ -1,7 +1,7 @@
-'''
+"""
 Contains BoardWindow class and required additional Constants defining the cell sizes.
 Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
-'''
+"""
 
 from functools import reduce
 import arcade
@@ -24,7 +24,7 @@ class BoardWindow(arcade.View):
     View for the main game phase (displaying boards and shooting shots)
     '''
 
-    def __init__(self, width: int, height: int, title: str, player: Player, on_end, is_own_board: bool):
+    def __init__(self, width: int, height: int, title: str, player: Player, is_own_board: bool):
         '''
         Initialize Board Window
 
@@ -41,7 +41,6 @@ class BoardWindow(arcade.View):
         super().__init__()
         self.shape_list = None
         self.player = player
-        self.on_end = on_end
         self.is_own_board = is_own_board
         self.width = width
         self.height = height
@@ -128,7 +127,7 @@ class AI_window(arcade.View):
     View for the main game phase (displaying boards and shooting shots)
     """
 
-    def __init__(self, width: int, height: int, title: str, player: Player, on_end, is_own_board: bool):
+    def __init__(self, width: int, height: int, title: str, player: Player, is_own_board: bool):
         """
         Initialize Board Window
 
@@ -145,7 +144,6 @@ class AI_window(arcade.View):
         super().__init__()
         self.shape_list = None
         self.player = player
-        self.on_end = on_end
         self.is_own_board = is_own_board
         self.width = width
         self.height = height
@@ -224,4 +222,3 @@ class AI_window(arcade.View):
             else:
                 arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
             self.recreate_grid()
-            self.on_end()
