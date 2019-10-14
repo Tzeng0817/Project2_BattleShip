@@ -8,6 +8,7 @@ from game import Game
 from board import Board
 from ship import Ship, Direction
 from player import Player
+from aigame import aiGame
 import random
 
 # Set how many rows and columns we will have
@@ -300,7 +301,7 @@ class DummyView(arcade.View):
             arcade.get_window().set_visible(False)
             player1 = DummyView.players[0]
             player2 = DummyView.players[1]
-            GAME = Game(player1, player2)
+            GAME = aiGame(player1, player2)
             arcade.set_window(GAME.player1_other_board)
             arcade.schedule(GAME.run, 0.25)
             DummyView.has_ran = True

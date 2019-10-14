@@ -41,9 +41,9 @@ class Game:
         self.own_board = arcade.Window(715, 715, "Your Board")
         self.other_board = arcade.Window(715, 715, "Their Board")
 
-        self.player2_own_board = AI_window(
+        self.player2_own_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player2, self.on_turn_end, True)
-        self.player2_other_board = AI_window(
+        self.player2_other_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player1, self.on_turn_end, False)
 
         self.player1_own_board = BoardWindow(

@@ -22,7 +22,7 @@ class aiGame:
         :param: player1 (Player) - player 1 in the game
         :return: returns none.
 
-        :pre: Both Players have been initalized already with ships placed
+        :pre: Both Players have been initialized already with ships placed
         """
 
         print("Making game")
@@ -32,14 +32,13 @@ class aiGame:
         self.turn_over = True
         self.game_over = False
         self.is_game_over = False
-
         self.own_board = arcade.Window(715, 715, "Your Board")
         self.other_board = arcade.Window(715, 715, "Their Board")
 
         self.player1_own_board = AI_window(
-            WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, True)
+            WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
         self.player1_other_board = BoardWindow(
-            WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player2, False)
+            WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player2, self.on_turn_end, False)
 
         self.own_board.show_view(self.player1_own_board)
         self.other_board.show_view(self.player1_other_board)
@@ -67,6 +66,17 @@ class aiGame:
 
         arcade.schedule(sys.exit, 5)
 
+    def on_turn_end(self):
+        """
+        Handles switching player states at the end of a turn
+
+        :return: None
+        :post: Switches current player and toggles self.turn_over
+        """
+
+        arcade.pause(1.5)
+        self.turn_over = True
+
     def run(self, _):
         """
         Handles the flow of the game and deciding when to switch turns
@@ -79,10 +89,6 @@ class aiGame:
                 self.player1_own_board.recreate_grid()
                 self.own_board.show_view(self.player1_own_board)
                 self.other_board.show_view(self.player1_other_board)
-            else:
-                self.player2_own_board.recreate_grid()
-                self.own_board.show_view(self.player2_own_board)
-                self.other_board.show_view(self.player2_other_board)
             self.turn_over = False
         elif (self.player1.has_lost() or self.player2.has_lost()) and not self.is_game_over:
             self.is_game_over = True
