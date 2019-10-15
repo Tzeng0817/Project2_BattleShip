@@ -15,7 +15,6 @@ CELL_HEIGHT = 80
 
 # This sets the margin between each cell
 MARGIN = 5
-
 OFFSET = 30
 
 
@@ -24,7 +23,7 @@ class BoardWindow(arcade.View):
     View for the main game phase (displaying boards and shooting shots)
     '''
 
-    def __init__(self, width: int, height: int, title: str, player: Player,  on_end, is_own_board: bool):
+    def __init__(self, width: int, height: int, title: str, player: Player, on_end, is_own_board: bool):
         '''
         Initialize Board Window
 
@@ -39,6 +38,7 @@ class BoardWindow(arcade.View):
         '''
 
         super().__init__()
+        self.x = False
         self.shape_list = None
         self.player = player
         self.on_end = on_end
@@ -104,7 +104,6 @@ class BoardWindow(arcade.View):
 
         :post: Could end turn if the press was valid
         """
-
         if self.is_own_board:
             return
 
@@ -121,6 +120,14 @@ class BoardWindow(arcade.View):
                 arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
             self.recreate_grid()
             self.on_end()
+            self.x = True
+
+
+def bol(self) -> bool:
+    if self.x== True:
+        return True
+    elif self.x == False:
+        return False
 
 
 class AI_window(arcade.View):
@@ -151,8 +158,9 @@ class AI_window(arcade.View):
         self.on_end = on_end
 
         arcade.set_background_color(arcade.color.BLACK)
-        self.press()
-        self.recreate_grid()
+        while self.bol() == True:
+            self.press()
+
 
     def recreate_grid(self):
         """
@@ -210,7 +218,7 @@ class AI_window(arcade.View):
         :post: Could end turn if the press was valid
         """
 
-        if self.is_own_board:
+        if not self.is_own_board:
             return
 
         # Change the x/y screen coordinates to grid coordinates
@@ -221,6 +229,7 @@ class AI_window(arcade.View):
         if row < 8 and column < 8 and row >= 0 and column >= 0:
             if self.player.be_attacked(row, column):
                 arcade.play_sound(arcade.load_sound('./sounds/hit.m4a'))
+
             else:
                 arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
             self.recreate_grid()
