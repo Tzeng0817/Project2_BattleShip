@@ -8,14 +8,14 @@ import sys
 import arcade
 from popup_modal import PopupModal
 from player import Player
-from board_window_easy import AI_window
-from board_window_easy import BoardWindow
+from board_window_mid import AI_window
+from board_window_mid import BoardWindow
 
 WINDOW_HEIGHT = 715
 WINDOW_WIDTH = 715
 
 
-class aiGame:
+class aiGame_mid:
     def __init__(self, player1: Player, player2: Player):
         """
         Constructs a new Game object. creates and instance of the main menu window.
@@ -40,7 +40,6 @@ class aiGame:
 
         self.player1_other_board = BoardWindow(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Their Board", self.player2, self.on_turn_end, False)
-
 
         self.own_board.show_view(self.player1_own_board)
         self.other_board.show_view(self.player1_other_board)

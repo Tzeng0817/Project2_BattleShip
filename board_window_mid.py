@@ -38,6 +38,7 @@ class BoardWindow(arcade.View):
         '''
 
         super().__init__()
+        self.x = False
         self.shape_list = None
         self.player = player
         self.on_end = on_end
@@ -119,6 +120,7 @@ class BoardWindow(arcade.View):
                 arcade.play_sound(arcade.load_sound('./sounds/miss.m4a'))
             self.recreate_grid()
             self.on_end()
+            self.x = True
 
 
 class AI_window(arcade.View):
@@ -149,7 +151,7 @@ class AI_window(arcade.View):
         self.on_end = on_end
 
         arcade.set_background_color(arcade.color.BLACK)
-
+        self.press()
 
     def recreate_grid(self):
         """
@@ -196,7 +198,7 @@ class AI_window(arcade.View):
                         y = (MARGIN + CELL_HEIGHT) * row + MARGIN + CELL_HEIGHT // 2
                         arcade.draw_text("X", x + (OFFSET / 2), y - (OFFSET / 2), arcade.color.BLACK, 32)
 
-    def press(self, x, y, _, __):
+    def press(self):
         """
         Handles user shooting at a grid cell including playing sounds
 
@@ -206,6 +208,9 @@ class AI_window(arcade.View):
 
         :post: Could end turn if the press was valid
         """
+
+        if not self.is_own_board:
+            return
 
         # Change the x/y screen coordinates to grid coordinates
         row = random.randint(1, 8)
