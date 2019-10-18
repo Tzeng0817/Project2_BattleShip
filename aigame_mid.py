@@ -10,7 +10,8 @@ from popup_modal import PopupModal
 from player import Player
 from board_window_mid import AI_window
 from board_window_mid import BoardWindow
-
+count = 0
+count2 = 0
 WINDOW_HEIGHT = 715
 WINDOW_WIDTH = 715
 
@@ -34,7 +35,7 @@ class aiGame_mid:
         self.is_game_over = False
         self.own_board = arcade.Window(715, 715, "Your Board")
         self.other_board = arcade.Window(715, 715, "Their Board")
-
+        self.score()
         self.player1_own_board = AI_window(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
 
@@ -75,6 +76,7 @@ class aiGame_mid:
         :post: Switches current player and toggles self.turn_over
         """
         AI_window(WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
+        score()
         arcade.pause(1.5)
         self.turn_over = True
 
@@ -94,3 +96,20 @@ class aiGame_mid:
         elif (self.player1.has_lost() or self.player2.has_lost()) and not self.is_game_over:
             self.is_game_over = True
             self.end_game()
+
+    def score(self):
+        """
+        Shows the endgame screen and announces the winner
+        :return: returns none.
+
+        :post: Application exists
+        """
+
+        if self.player1.be_attacked(x_pos,y_pos):
+            count = count + 1
+            print(count)
+            #popup_modal(count)
+        elif self.player2.be_attacked(x_pos,y_pos):
+            count2 = count2 + 1
+            print(count2)
+            #popup_modal(count2)
