@@ -75,7 +75,7 @@ class aiGame:
         :return: None
         :post: Switches current player and toggles self.turn_over
         """
-
+        AI_window(WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
         arcade.pause(1.5)
         self.turn_over = True
 
