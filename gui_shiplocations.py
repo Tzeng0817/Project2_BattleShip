@@ -143,7 +143,8 @@ class ShipPlacementView(arcade.View):
             # allows selection of location of ship to be horizontal
             if self.direction == Direction.RIGHT:
                 for j in range(self.length_of_ship):
-                    if self.grid[row][column + j] == 1:
+                    if  row < ROW_COUNT and column < COLUMN_COUNT and (
+                            column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 1:
                         bol = False
                         break
                     else:
