@@ -1,5 +1,5 @@
 """""
-Handles placing ships in its own View.
+Handles placing ships in its own view.
 Heavily modified version of http://arcade.academy/examples/array_backed_grid_buffered.html#array-backed-grid-buffered
 """""
 
@@ -146,11 +146,12 @@ class ShipPlacementView(arcade.View):
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT:
+                                column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column+i] != 1:
                             self.grid[row][column + i] = 1
                             self.selected = True
                         else:
                             print(f"invalid placement")
+                            self.grid[row][column] = 0
                             self.selected = False
                             break
                 # if grid cell is red and ship is selected make current selection ship cells white again and changed
@@ -412,11 +413,12 @@ class AI_place(arcade.View):
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT:
+                                column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column+i] != 1:
                             self.grid[row][column + i] = 1
                             self.selected = True
                         else:
                             print(f"invalid placement")
+                            self.grid[row][column] = 0
                             self.selected = False
                             break
                 # if grid cell is red and ship is selected make current selection ship cells white again and changed

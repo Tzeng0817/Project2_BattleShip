@@ -1,7 +1,7 @@
 """
-Game module containing the Game class and
+AI Game module containing the Game class for AI and
 the SetUp class which gets the information needed for
-Game to initialize
+AI to initialize the mid-level game
 """
 
 import sys
@@ -19,11 +19,11 @@ WINDOW_WIDTH = 715
 class aiGame_mid:
     def __init__(self, player1: Player, player2: Player):
         """
-        Constructs a new Game object. creates and instance of the main menu window.
+        Constructs a new Game object. Creates an instance of the main menu window.
         :param: player1 (Player) - player 1 in the game
         :return: returns none.
 
-        :pre: Both Players have been initialized already with ships placed
+        :pre: Both Players (Player 2 is AI in this case) have been initialized already with ships placed
         """
 
         print("Making game")
@@ -35,7 +35,6 @@ class aiGame_mid:
         self.is_game_over = False
         self.own_board = arcade.Window(715, 715, "Your Board")
         self.other_board = arcade.Window(715, 715, "Their Board")
-        self.score()
         self.player1_own_board = AI_window(
             WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
 
@@ -76,8 +75,17 @@ class aiGame_mid:
         :post: Switches current player and toggles self.turn_over
         """
         AI_window(WINDOW_WIDTH, WINDOW_HEIGHT, "Your Board", self.player1, self.on_turn_end, True)
-        score()
         arcade.pause(1.5)
+        y = self.player1.x
+        z = self.player2.x
+        print(f"                         ScoreBoard                                  ")
+        print(f"Player 1's Score: ")
+        print(z)
+        print(f"")
+        print(f"")
+        print(f"")
+        print(f"AI's Score: ")
+        print(y)
         self.turn_over = True
 
     def run(self, _):
@@ -96,20 +104,3 @@ class aiGame_mid:
         elif (self.player1.has_lost() or self.player2.has_lost()) and not self.is_game_over:
             self.is_game_over = True
             self.end_game()
-
-    def score(self):
-        """
-        Shows the endgame screen and announces the winner
-        :return: returns none.
-
-        :post: Application exists
-        """
-
-        if self.player1.be_attacked(x_pos,y_pos):
-            count = count + 1
-            print(count)
-            #popup_modal(count)
-        elif self.player2.be_attacked(x_pos,y_pos):
-            count2 = count2 + 1
-            print(count2)
-            #popup_modal(count2)
