@@ -155,7 +155,7 @@ class ShipPlacementView(arcade.View):
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT and bol = True:
+                                column + self.length_of_ship - 1) < COLUMN_COUNT and bol == True:
                             self.grid[row][column + i] = 1
                             self.selected = True
                         else:
@@ -423,7 +423,8 @@ class AI_place(arcade.View):
             # allows selection of location of ship to be horizontal
             if random_direction == 0:
                     for j in range(self.length_of_ship):
-                        if self.grid[row][column + j] == 1:
+                        if  row < ROW_COUNT and column < COLUMN_COUNT and (
+                            column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 1:
                             bol = False
                             break
                         else:
@@ -432,16 +433,16 @@ class AI_place(arcade.View):
                             bol = True
                 # if grid cell is white with no ship currently placed, change grid cells to selected based on
                 # ship length, origin, and direction and then change setting to ship is successfully selected
-                if self.grid[row][column] == 0 and not self.selected:
-                    for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT and bol == True:
-                            self.grid[row][column + i] = 1
-                            self.selected = True
-                        else:
-                            self.grid[row][column] = 0
-                            self.selected = False
-                            break
+            if self.grid[row][column] == 0 and not self.selected:
+                for i in range(self.length_of_ship):
+                    if row < ROW_COUNT and column < COLUMN_COUNT and (
+                            column + self.length_of_ship - 1) < COLUMN_COUNT and bol == True:
+                        self.grid[row][column + i] = 1
+                        self.selected = True
+                    else:
+                        self.grid[row][column] = 0
+                        self.selected = False
+                        break
                 # if grid cell is red and ship is selected make current selection ship cells white again and changed
                 # selection back to not selection elif self.grid[row][column] == 1 and self.selected: for i in range(
                 # self.length_of_ship): if row < ROW_COUNT and column < COLUMN_COUNT and (column +
