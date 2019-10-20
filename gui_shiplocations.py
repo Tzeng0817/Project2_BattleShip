@@ -133,6 +133,7 @@ class ShipPlacementView(arcade.View):
         if self.column >= 8 or self.row >= 8 or self.column < 0 or self.row < 0:
             return
         bol = False
+        bol2 = False
         row = self.row
         column = self.column
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
@@ -140,23 +141,25 @@ class ShipPlacementView(arcade.View):
         if row < ROW_COUNT and column < COLUMN_COUNT:
             i = 0
             j = 0
+            k = 0
             # allows selection of location of ship to be horizontal
             if self.direction == Direction.RIGHT:
                 for j in range(self.length_of_ship):
                     if  row < ROW_COUNT and column < COLUMN_COUNT and (
                             column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 1:
                         bol = False
+                        bol2 = False
                         break
-                    else:
-                        print("bug")
-                        print(j)
+                    elif row < ROW_COUNT and column < COLUMN_COUNT and (
+                            column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 0:
                         bol = True
+                        bol2 = True
                 # if grid cell is white with no ship currently placed, change grid cells to selected based on
                 # ship length, origin, and direction and then change setting to ship is successfully selected
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
                         if row < ROW_COUNT and column < COLUMN_COUNT and (
-                                column + self.length_of_ship - 1) < COLUMN_COUNT and bol == True:
+                                column + self.length_of_ship - 1) < COLUMN_COUNT and bol == True and bol2 == True:
                             self.grid[row][column + i] = 1
                             self.selected = True
                         else:
@@ -178,11 +181,20 @@ class ShipPlacementView(arcade.View):
                     print(f"there is already a ship in this space")
             # allows selection of location of ship to be vertical
             elif self.direction == Direction.DOWN:
+                for k in range(self.length_of_ship):
+                    if  row < ROW_COUNT and column < COLUMN_COUNT and (
+                            column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row - k][column] == 1:
+                        bol2 = False
+                        bol = False
+                        break
+                    else:
+                        bol2 = True
+                        bol = True
                 # if grid cell is white with no ship currently placed, change grid cells to selected based on
                 # ship length, origin, and direction and then change setting to ship is successfully selected
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1 and self.grid[row-i][column] != 1:
+                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1 and bol2 == True and bol == True:
                             self.grid[row - i][column] = 1
                             self.selected = True
                         else:
@@ -416,22 +428,21 @@ class AI_place(arcade.View):
         self.column = column
         # 0 is Direction.RIGHT 1 is Direction.DOWN
         random_direction = random.randint(0,1)
-        print (random_direction)
         # Make sure initial mouse press is on grid
         if row < ROW_COUNT and column < COLUMN_COUNT:
             i = 0
             j = 0
+            k = 0
             # allows selection of location of ship to be horizontal
             if random_direction == 0:
-                    for j in range(self.length_of_ship):
-                        if  row < ROW_COUNT and column < COLUMN_COUNT and (
-                            column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 1:
-                            bol = False
-                            break
-                        else:
-                            print("bug")
-                            print(j)
-                            bol = True
+                self.direction = Direction.RIGHT
+                for j in range(self.length_of_ship):
+                    if  row < ROW_COUNT and column < COLUMN_COUNT and (
+                        column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row][column + j] == 1:
+                        bol = False
+                        break
+                    else:
+                        bol = True
                 # if grid cell is white with no ship currently placed, change grid cells to selected based on
                 # ship length, origin, and direction and then change setting to ship is successfully selected
             if self.grid[row][column] == 0 and not self.selected:
@@ -456,11 +467,19 @@ class AI_place(arcade.View):
 
             # allows selection of location of ship to be vertical
             elif random_direction == 1:
+                self.direction = Direction.DOWN
+                for k in range(self.length_of_ship):
+                    if  row < ROW_COUNT and column < COLUMN_COUNT and (
+                        column + self.length_of_ship - 1) < COLUMN_COUNT and self.grid[row - k][column] == 1:
+                        bol = False
+                        break
+                    else:
+                        bol = True
                 # if grid cell is white with no ship currently placed, change grid cells to selected based on
                 # ship length, origin, and direction and then change setting to ship is successfully selected
                 if self.grid[row][column] == 0 and not self.selected:
                     for i in range(self.length_of_ship):
-                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1 and self.grid[row-i][column] != 1:
+                        if row < ROW_COUNT and column < COLUMN_COUNT and (row - self.length_of_ship + 1) > -1 and bol == True:
                             self.grid[row - i][column] = 1
                             self.selected = True
                         else:
