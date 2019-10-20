@@ -35,7 +35,7 @@ class BoardWindow(arcade.View):
         :param: on_end (Function): Function to call when a turn ends
         :param: is_own_board (Bool): Is this board owned by the player it refers to
         :return: None
-        :pre: Player has been initalized with ships already placed
+        :pre: Player1 has been initalized with ships already placed as well as medium-level AI's
         '''
 
         super().__init__()
@@ -54,7 +54,10 @@ class BoardWindow(arcade.View):
         Rebuild grid based on updated player data
 
         :returns: None
+        :param: shape_list: the list of shape based on aracde build-in function
+
         :post: self.shape_list is updated to reflect the changing player board underneath
+        :post: color setup
         '''
 
         self.shape_list = arcade.ShapeElementList()
@@ -74,7 +77,12 @@ class BoardWindow(arcade.View):
 
     def on_draw(self):
         """
-        Renders the class to the screen
+        :pre: the board for both easy-level AI and player1 have been initalized
+        :post: Renders the class to the screen
+
+        :param: shape_list: the list of shape based on aracde build-in function
+        :param: player (Player): Player data this board shows
+        :param: is_own_board (Bool): Is this board owned by the player it refers to
         """
 
         arcade.start_render()
@@ -102,6 +110,7 @@ class BoardWindow(arcade.View):
         :param: y (int): y location of the click
         :returns: None
 
+        :pre: all the previous function must be compiliable
         :post: Could end turn if the press was valid
         """
         if self.is_own_board:
@@ -130,8 +139,10 @@ class BoardWindow(arcade.View):
         """
         Handles user shooting at a grid cell including playing sounds
 
-        :param: x (int): x location of the click
-        :param: y (int): y location of the click
+        :param: row: x
+        :param: coloum: y
+        :param: player.board: player1's board
+        :param: player (Player): Player data this board shows
         :returns: None
 
         :post: Could end turn if the press was valid
@@ -163,14 +174,16 @@ class AI_window(arcade.View):
         """
         Initialize Board Window
 
+        :param: shape_list: the list of shape based on aracde build-in function
+        :param: first: the variable to the players who shot first
         :param: width (int): Width of window
         :param: height (int): Height of window
-        :param: title (str): Title for Window
         :param: player (Player): Player data this board shows
         :param: on_end (Function): Function to call when a turn ends
         :param: is_own_board (Bool): Is this board owned by the player it refers to
         :return: None
-        :pre: Player has been initalized with ships already placed
+        :pre: Player1 has been initalized with ships already placed as well as easy-level AI's
+        :post: easy-level AI's window initalized
         """
 
         super().__init__()
@@ -188,6 +201,7 @@ class AI_window(arcade.View):
         Rebuild grid based on updated player data
 
         :returns: None
+        :pre: shape_.list
         :post: self.shape_list is updated to reflect the changing player board underneath
         """
 
@@ -209,7 +223,9 @@ class AI_window(arcade.View):
 
     def on_draw(self):
         """
-        Renders the class to the screen
+        :param: none
+        :pre: AI's board must be initalized already
+        :post: Renders the AI class to the screen
         """
 
         arcade.start_render()
@@ -235,9 +251,10 @@ class AI_window(arcade.View):
 
         :param: x (int): x location of the click
         :param: y (int): y location of the click
+        :param: player (Player): Player data this board shows
         :returns: None
 
-        :post: Could end turn if the press was valid
+        :post: Could end turn if the press was valid / chance the x/y screen coordinaters to grid coordinates
         """
 
         # Change the x/y screen coordinates to grid coordinates
